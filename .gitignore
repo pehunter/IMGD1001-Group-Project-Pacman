@@ -3,3 +3,5 @@ Logs/
 UserSettings/
 Temp/
 obj/
+.vs/
+*.log
