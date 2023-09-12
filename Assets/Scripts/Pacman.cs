@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //Required components
 [RequireComponent(typeof(Movement))]
@@ -53,6 +54,8 @@ public class Pacman : MonoBehaviour
             movement.nextDirection = Vector2.left;
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             movement.nextDirection = Vector2.right;
+        else if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene("MainMenu");
         if (Input.GetKeyDown(KeyCode.Space))
             PlaceBomb();
 
