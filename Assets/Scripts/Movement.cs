@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour
     public Vector2 nextDirection { get; set; }
     public Vector3 startingPosition { get; private set; }
 
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();

@@ -8,6 +8,7 @@ public class Pellet : MonoBehaviour
     //How many points the pellet is worth
     public int points = 10;
 
+
     //Ran whenever the pellet is eaten
     protected virtual void Eat()
     {
@@ -19,6 +20,8 @@ public class Pellet : MonoBehaviour
     {
         //If the collider is Pacman, eat this pellet.
         if (collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
+        {
             Eat();
+        }
     }
 }
