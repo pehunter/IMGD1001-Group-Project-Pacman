@@ -89,6 +89,7 @@ public class Pacman : MonoBehaviour
             FindObjectOfType<GameManager>().AddBomb(bomb.GetComponent<PelletBomb>());
 
             bombs--;
+            FindObjectOfType<GameManager>().SetBombs(bombs);
         }
     }
 
@@ -96,6 +97,13 @@ public class Pacman : MonoBehaviour
     public void AddBomb(int bombs)
     {
         this.bombs += bombs;
+        FindObjectOfType<GameManager>().SetBombs(this.bombs);
+    }
+
+    //Disable/enable sprite renderer
+    public void SetSprite(bool state)
+    {
+        spriteRenderer.enabled = state;
     }
 
     public void ResetState()
