@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{8600BD34-D008-5EB3-D464-E090CF1F9365}</ProjectGuid>
+    <ProjectGuid>{8DB55ABB-765E-8A69-B93D-5FA818036F14}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Warp.cs" />
     <Compile Include="Assets\Scripts\Ghost Frightened.cs" />
     <Compile Include="Assets\Scripts\Game Manager.cs" />
+    <Compile Include="Assets\Scripts\Flash.cs" />
     <Compile Include="Assets\Scripts\Pellet Bomb Giver.cs" />
     <Compile Include="Assets\Scripts\Ghost.cs" />
     <Compile Include="Assets\Scripts\Sprite Animator.cs" />

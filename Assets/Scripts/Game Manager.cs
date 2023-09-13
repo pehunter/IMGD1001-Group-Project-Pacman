@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,7 +10,18 @@ public class GameManager : MonoBehaviour
     public Pacman pacman;
     public Transform pellets;
 
+    //UI
+    public TextMeshProUGUI scoreDisplay;
+    public TextMeshProUGUI highScoreDisplay;
+    public GameObject lifeContainer;
+    public GameObject bombContainer;
+    public GameObject lifeIcon;
+    public GameObject bombIcon;
+    public GameObject incomingScore;
+
+    private GameObject incScore;
     public int score { get; private set; }
+    public int highScore { get; private set; }
     public int lives { get; private set; }
 
     List<PelletBomb> bombs;
@@ -23,6 +35,8 @@ public class GameManager : MonoBehaviour
     {
         bombs = new List<PelletBomb>();
         explosions = new List<GameObject>();
+
+        SetHighScore(0);
 
         //Start a new game on load
         NewGame();
@@ -105,19 +119,84 @@ public class GameManager : MonoBehaviour
         pacman.gameObject.SetActive(false);
 
         pacman.AddBomb(pacman.bombs * -1);
+
+        if (score > highScore)
+            SetHighScore(score);
     }
 
     //Set score
     private void SetScore(int newScore)
     {
         this.score = newScore;
+        this.scoreDisplay.text = newScore.ToString();
+    }
+
+    //Set score
+    private void SetHighScore(int newScore)
+    {
+        this.highScore = newScore;
+        this.highScoreDisplay.text = newScore.ToString();
     }
 
     //Set lives
     private void SetLives(int newLives)
     {
-        if(!pacman.frozen)
+        if (!pacman.frozen)
+        {
             this.lives = newLives;
+            //Add/remove lives from UI until it maches
+            int lifeElapsed = lifeContainer.transform.childCount;
+
+            //Add
+            while (lifeElapsed < newLives)
+            {
+                var newLife = Instantiate(lifeIcon);
+                newLife.transform.SetParent(lifeContainer.transform, false);
+                newLife.GetComponent<RectTransform>().anchoredPosition = new Vector2(24 * lifeElapsed, 0);
+                //newLife.GetComponent<RectTransform>().localScale = new Vector3(-1, 1, 1);
+                lifeElapsed++;
+            }
+
+            //Remove
+            while (lifeElapsed > newLives)
+            {
+                Destroy(lifeContainer.transform.GetChild(lifeElapsed - 1).gameObject);
+                lifeElapsed--;
+            }
+
+        }
+    }
+
+    //Set bomb count
+    public void SetBombs(int newBombs)
+    {
+        //Add/remove bombs from UI until it maches
+        int bombsDrawn = bombContainer.transform.childCount;
+
+        //Add
+        while (bombsDrawn < newBombs)
+        {
+            var newBomb = Instantiate(bombIcon);
+            newBomb.transform.SetParent(bombContainer.transform, false);
+            newBomb.GetComponent<RectTransform>().anchoredPosition = new Vector2(-24 * bombsDrawn, 0);
+            //newLife.GetComponent<RectTransform>().localScale = new Vector3(-1, 1, 1);
+            bombsDrawn++;
+        }
+
+        //Remove
+        while (bombsDrawn > newBombs)
+        {
+            Destroy(bombContainer.transform.GetChild(bombsDrawn - 1).gameObject);
+            bombsDrawn--;
+            }
+    }
+
+
+    //Remove active incoming score
+    public void RemoveIncScore()
+    {
+        if (incScore != null)
+            Destroy(incScore);
     }
 
     //Handle Pacman eating a ghost
@@ -125,6 +204,15 @@ public class GameManager : MonoBehaviour
     {
         //Calculate points based on ghost multiplier
         int points = ghost.points * ghostMultiplier;
+
+        //Insert an incoming score at ghost location
+        if (incScore != null)
+            Destroy(incScore);
+        incScore = Instantiate(incomingScore);
+        incScore.GetComponent<TextMeshPro>().text = points.ToString();
+        incScore.transform.position = new Vector3(ghost.transform.position.x, ghost.transform.position.y, -6);
+        Invoke(nameof(RemoveIncScore), 1.0f);
+
         SetScore(score + points);
 
         ghostMultiplier++;
@@ -192,6 +280,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GMPInvoke(float duration)
+    {
+        //Start or reset frightened state timer.
+        CancelInvoke(nameof(ResetGhostMultiplier));
+        Invoke(nameof(ResetGhostMultiplier), duration);
+    }
+
     //Handle consuming a power pellet
     public void PowerPelletEaten(PowerPellet pellet)
     {
@@ -205,9 +300,7 @@ public class GameManager : MonoBehaviour
         //Eat power pellet as if it were a normal pellet
         PelletEaten(pellet);
 
-        //Start or reset frightened state timer.
-        CancelInvoke(nameof(ResetGhostMultiplier));
-        Invoke(nameof(ResetGhostMultiplier), pellet.duration);
+        GMPInvoke(pellet.duration);
     }
 
     //Handle consuming a bomb pellet

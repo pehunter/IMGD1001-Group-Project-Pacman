@@ -56,7 +56,9 @@ public class Explosion : MonoBehaviour
         }
         //If a Ghost touches this explosion, it will die.
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ghost"))
+        {
             GetComponent<AudioSource>().PlayOneShot(bonkSound, 0.7f);
             FindObjectOfType<GameManager>().GhostEaten(collision.gameObject.GetComponent<Ghost>());
+        }
     }
 }

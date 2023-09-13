@@ -51,6 +51,7 @@ public class PelletBomb : MonoBehaviour
     //Explode the bomb
     void Explode()
     {
+        FindObjectOfType<GameManager>().GMPInvoke(length * duration);
         //First entry: up/down/left/right are undefined, zero only vector inside.
         List<Vector2> newList = new List<Vector2>();
         foreach(Vector2 direction in directions)
