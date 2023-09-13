@@ -8,6 +8,11 @@ public class Explosion : MonoBehaviour
     //SpriteRenderer for this explosion piece
     SpriteRenderer sprite;
 
+    //Sound effects for this explosion piece
+    public AudioSource source;
+    public AudioClip bonkSound;
+    public AudioClip dieSound;
+
     //Bomb this Explosion came from
     public PelletBomb bomb;
 
@@ -19,6 +24,7 @@ public class Explosion : MonoBehaviour
     void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
+        source = GetComponent<AudioSource>(); 
     }
 
     private void Update()
@@ -33,6 +39,7 @@ public class Explosion : MonoBehaviour
     //Set the explosion with the given Sprite at the given Position and Rotation.
     public void Place(Sprite sprite, Vector3 position, float rotation)
     {
+        source.Play(); 
         this.sprite.sprite = sprite;
         this.transform.position = position;
         this.transform.rotation = Quaternion.AngleAxis(rotation, Vector3.forward);
@@ -43,9 +50,13 @@ public class Explosion : MonoBehaviour
     {
         //If Pacman touches this explosion, it will die.
         if (collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
+        {
+            GetComponent<AudioSource>().PlayOneShot(dieSound, 0.7f);
             FindObjectOfType<GameManager>().PacmanEaten();
+        }
         //If a Ghost touches this explosion, it will die.
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ghost"))
+            GetComponent<AudioSource>().PlayOneShot(bonkSound, 0.7f);
             FindObjectOfType<GameManager>().GhostEaten(collision.gameObject.GetComponent<Ghost>());
     }
 }
