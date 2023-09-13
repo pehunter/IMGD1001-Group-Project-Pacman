@@ -134,6 +134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680d8bff19b6ab24b9ebc4602d90de0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &145703817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1080145370551876476, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
+  m_PrefabInstance: {fileID: 83550259693899421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &242920484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -265,7 +270,9 @@ MonoBehaviour:
   scoreDisplay: {fileID: 1223425942}
   highScoreDisplay: {fileID: 1114408496}
   lifeContainer: {fileID: 735356457}
+  bombContainer: {fileID: 145703817}
   lifeIcon: {fileID: 5160959626368171593, guid: a6acae2f42ad8c647839e7ab89de2eaa, type: 3}
+  bombIcon: {fileID: 7561213770337252939, guid: 966463d23e2ee1647a69041be5602442, type: 3}
   incomingScore: {fileID: 5474498740858837495, guid: f4d0a2e5744915343817c3721402fe86, type: 3}
 --- !u!1 &302809592
 GameObject:
