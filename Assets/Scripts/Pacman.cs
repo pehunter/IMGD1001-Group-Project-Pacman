@@ -26,6 +26,10 @@ public class Pacman : MonoBehaviour
     public SpriteAnimator animator { get; private set; }
     public SpriteRenderer deathRenderer { get; private set; }
     public SpriteAnimator deathAnimator { get; private set; }
+    
+    //audio stuff
+    public AudioSource source;
+    public AudioClip youDied;
 
 
     public bool frozen { get; private set; } = false;
@@ -37,9 +41,13 @@ public class Pacman : MonoBehaviour
         spriteRenderer = normal.GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
         animator = normal.GetComponent<SpriteAnimator>();
+        source = GetComponent<AudioSource>(); 
 
         deathAnimator = dead.GetComponent<SpriteAnimator>();
         deathRenderer = dead.GetComponent <SpriteRenderer>();
+
+        //start waka loop 
+        source.Play(); 
     }
 
     // Update is called once per frame
@@ -67,9 +75,17 @@ public class Pacman : MonoBehaviour
 
             //Check if wall hit
             if (movement.Occupied(movement.direction, true))
+            {
                 animator.Freeze();
+                //if the animator stops the waka loop pauses.. 
+                source.Pause(); 
+            }
             else
+            {
                 animator.Unfreeze();
+                //and if the animator unstops the waka loop unpauses! 
+                source.UnPause();
+            }
         }
     }
 
@@ -115,16 +131,21 @@ public class Pacman : MonoBehaviour
         collider.enabled = true;
         movement.ResetState();
         gameObject.SetActive(true);
+        source.Play();
     }
 
     public void Die()
     {
+        source.Stop();
         //Remain in frozen state for a second before death animation
         Invoke(nameof(ActuallyDie), 1f);
     }
 
     private void ActuallyDie()
     {
+        //play death noise 
+        GetComponent<AudioSource>().PlayOneShot(youDied, 0.7f);
+
         //Rotate before dying
         transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(movement.direction.y, movement.direction.x) * Mathf.Rad2Deg - 90f, Vector3.forward);
 

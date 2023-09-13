@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
+
     //scene for unmodified game 
     public void LaunchClassic()
     {
@@ -27,6 +28,29 @@ public class Buttons : MonoBehaviour
     public void LaunchVNotes()
     {
         SceneManager.LoadScene("VersionNotes");
+    }
+
+    //launched classic after 0.5 seconds, allowing the audio to play
+    public void DelayedClassic()
+    {
+        Invoke("LaunchClassic", 0.5f);
+    }
+
+    //ditto for variant
+    public void DelayedVariant()
+    {
+        Invoke("LaunchVariant", 0.5f);
+    }
+
+    //ditto for credits 
+    public void DelayedCredits()
+    {
+        Invoke("LaunchCredits", 0.5f);
+    }
+
+    public void DelayedVNotes()
+    {
+        Invoke("LaunchVNotes", 0.5f);
     }
 }
 
