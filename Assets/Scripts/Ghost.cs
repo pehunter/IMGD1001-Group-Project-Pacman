@@ -15,6 +15,9 @@ public class Ghost : MonoBehaviour
     public string initialBehavior;
     public float initialDuration;
 
+    //How long it takes the ghost to respawn
+    public float respawnTime;
+
     //Currently set behavior
     private GhostBehavior currentBehavior;
 
@@ -33,6 +36,7 @@ public class Ghost : MonoBehaviour
     public GameObject blue;
     public GameObject white;
 
+    public bool frozen;
 
     //Renderers for each part of the ghost
     public SpriteRenderer bodySprite { get; private set; }
@@ -67,14 +71,20 @@ public class Ghost : MonoBehaviour
 
     public void ResetState()
     {
+        //If ghost has bomb, reset that.
+        if (GetComponent<GhostBomb>() != null)
+            GetComponent<GhostBomb>().ResetState();
+
         //Reset renderers
         bodySprite.enabled = true;
         eyesSprite.enabled = true;
         blueSprite.enabled = false;
         whiteSprite.enabled = false;
 
-        //Reactivate gameObject and reset movement
+        //Reactivate gameObject, re-enable colliders and reset movement
         gameObject.SetActive(true);
+        movement.body.isKinematic = false;
+        movement.collider.enabled = true;
         movement.ResetState();
 
         swapBehavior(Type.GetType(initialBehavior), initialDuration, true);
@@ -137,6 +147,7 @@ public class Ghost : MonoBehaviour
     //Freeze the ghost in place
     public void Freeze()
     {
+        frozen = true;
         movement.Freeze();
         bodyAnimation.Freeze();
         whiteAnimation.Freeze();
@@ -146,6 +157,7 @@ public class Ghost : MonoBehaviour
     //Unfreeze the ghost
     public void Unfreeze()
     {
+        frozen = false;
         movement.Unfreeze();
         bodyAnimation.Unfreeze();
         whiteAnimation.Unfreeze();

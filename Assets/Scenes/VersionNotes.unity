@@ -181,17 +181,23 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Scroll with W and S. Return to the main \nmenu with ESC.\n\nVersion 0.0.1.0s1\n\nAdditions
-    from sample: \n\nAdded a main menu. \n\nAdded a \"variant\" mode of the game.
-    This \n\"variant\" mode has original sprites and \nreplaces the Power Pellet
-    system with bombs, \nwhich can be placed after collection. When \nplaced, these
-    bombs explode after a set time, \nkilling anyone (ghost or player) who is \ncaught
-    in the blast. \n\nAdded a scrollable credits screen. \n\nAdded a scrollable version
-    notes screen. \n\nAdded navigation from the \"classic\" game, \n\"variant\" game,
-    credits, and version notes to \nthe main menu."
+  m_text: "Scroll with W and S. Return to the main \nmenu with ESC.\n\n-- Version
+    0.0.1.0s1 --\n\nAdditions from sample: \n\nAdded a main menu. \n\nAdded a \"variant\"
+    mode of the game. This \n\"variant\" mode has original sprites and \nreplaces
+    the Power Pellet system with bombs, \nwhich can be placed after collection. When
+    \nplaced, these bombs explode after a set time, \nkilling anyone (ghost or player)
+    who is \ncaught in the blast. \n\nAdded a scrollable credits screen. \n\nAdded
+    a scrollable version notes screen. \n\nAdded navigation from the \"classic\"
+    game, \n\"variant\" game, credits, and version notes to \nthe main menu.\n\n--
+    Version 0.0.2.0s2 --\n\nAdded sound effects for multiple game interactions.\n\nAdded
+    splash screens for Zigurous, \nWPI, and the game title at the start.\n\nAdded
+    a new ghost type \ncalled \"explode ghost\", which is a\n ghost that will create
+    an \nexplosion after a period of time.\n\nAdded custom sprites for explode ghosts.\n\nAdded
+    UI, which visualizes score, life count,\nand bomb count.\n\nWhen a ghost is eaten,
+    its score is now displayed.\n\nFixed some old bugs\n\nIntroduced new bugs"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a9cab8cde7452db45829cbd31bce388a, type: 2}
+  m_sharedMaterial: {fileID: 6116094958838382817, guid: a9cab8cde7452db45829cbd31bce388a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -215,8 +221,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

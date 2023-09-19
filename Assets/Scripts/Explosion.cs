@@ -48,17 +48,24 @@ public class Explosion : MonoBehaviour
     //When something collides with the explosion...
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        source.pitch = 1;
         //If Pacman touches this explosion, it will die.
         if (collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
         {
-            GetComponent<AudioSource>().PlayOneShot(dieSound, 0.7f);
+            source.PlayOneShot(dieSound, 0.7f);
             FindObjectOfType<GameManager>().PacmanEaten();
         }
         //If a Ghost touches this explosion, it will die.
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ghost"))
         {
-            GetComponent<AudioSource>().PlayOneShot(bonkSound, 0.7f);
-            FindObjectOfType<GameManager>().GhostEaten(collision.gameObject.GetComponent<Ghost>());
+            if (collision.gameObject.GetComponent<GhostDead>() == null)
+            {
+                if (collision.gameObject.GetComponent<GhostBomb>() != null)
+                    collision.gameObject.GetComponent<GhostBomb>().PreventExplosion();
+                source.pitch = 0.93f + FindObjectOfType<GameManager>().ghostMultiplier / 15f;
+                source.PlayOneShot(bonkSound, 0.7f);
+                FindObjectOfType<GameManager>().GhostEaten(collision.gameObject.GetComponent<Ghost>());
+            }
         }
     }
 }

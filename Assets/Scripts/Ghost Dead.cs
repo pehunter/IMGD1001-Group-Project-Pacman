@@ -51,7 +51,7 @@ public class GhostDead : GhostBehavior
         Vector3 position = transform.position;
 
         float elapsed = 0f;
-        float animDuration = 1.5f;
+        float animDuration = duration;
 
         //Explicity set position to animate ghost exiting while ignoring collisions
         while (elapsed < animDuration)
