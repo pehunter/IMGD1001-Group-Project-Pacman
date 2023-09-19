@@ -44,6 +44,7 @@ public abstract class GhostBehavior : MonoBehaviour
         {
             case "Cyan":
             case "Orange":
+            case "Orange - Bomber":
                 ghost.swapBehavior(typeof(GhostScatter), 0);
                 break;
             default:

@@ -115,12 +115,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c4c45545b158943a59b1b1b117da04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 2
+  duration: 0.75
   explosionSpeed: 0.05
-  length: 20
+  length: 8
+  explosionLife: 3
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 512
+  ghostLayer:
+    serializedVersion: 2
+    m_Bits: 128
   explosion: {fileID: 5188067434215914401, guid: bad443b7b5813ff45bf0a9d2265db1ae, type: 3}
   center: {fileID: 21300000, guid: a66fca21a2eaf43459e2fbb561e630d6, type: 3}
   middle: {fileID: 21300000, guid: afc3b534b8a93544984cf1676ba61ae4, type: 3}

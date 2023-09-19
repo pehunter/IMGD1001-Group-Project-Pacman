@@ -442,12 +442,14 @@ MonoBehaviour:
   points: 200
   initialBehavior: GhostHome
   initialDuration: 2
+  respawnTime: 5
   inside: {fileID: 0}
   outside: {fileID: 0}
   body: {fileID: 1744116564775522674}
   eyes: {fileID: 6370320430419670569}
   blue: {fileID: 2214603355021245903}
   white: {fileID: 974311249453619119}
+  frozen: 0
   pacman: {fileID: 0}
 --- !u!1 &6370320430419670569
 GameObject:

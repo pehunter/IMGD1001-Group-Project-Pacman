@@ -68,6 +68,10 @@ public class GhostHome : GhostBehavior
         ghost.movement.body.isKinematic = false;
         ghost.movement.enabled = true;
 
+        //If ghost contains a bomb, enable that bomb.
+        if (gameObject.GetComponent<GhostBomb>() != null)
+            gameObject.GetComponent<GhostBomb>().begin = true;
+
         //Pass behavior
         GhostBehavior.switchBehavior(ghost);
     }

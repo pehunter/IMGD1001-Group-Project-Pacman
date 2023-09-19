@@ -8,6 +8,11 @@ public class Explosion : MonoBehaviour
     //SpriteRenderer for this explosion piece
     SpriteRenderer sprite;
 
+    //Sound effects for this explosion piece
+    public AudioSource source;
+    public AudioClip bonkSound;
+    public AudioClip dieSound;
+
     //Bomb this Explosion came from
     public PelletBomb bomb;
 
@@ -19,6 +24,7 @@ public class Explosion : MonoBehaviour
     void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
+        source = GetComponent<AudioSource>(); 
     }
 
     private void Update()
@@ -33,6 +39,7 @@ public class Explosion : MonoBehaviour
     //Set the explosion with the given Sprite at the given Position and Rotation.
     public void Place(Sprite sprite, Vector3 position, float rotation)
     {
+        source.Play(); 
         this.sprite.sprite = sprite;
         this.transform.position = position;
         this.transform.rotation = Quaternion.AngleAxis(rotation, Vector3.forward);
@@ -41,11 +48,24 @@ public class Explosion : MonoBehaviour
     //When something collides with the explosion...
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        source.pitch = 1;
         //If Pacman touches this explosion, it will die.
         if (collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
+        {
+            source.PlayOneShot(dieSound, 0.7f);
             FindObjectOfType<GameManager>().PacmanEaten();
+        }
         //If a Ghost touches this explosion, it will die.
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ghost"))
-            FindObjectOfType<GameManager>().GhostEaten(collision.gameObject.GetComponent<Ghost>());
+        {
+            if (collision.gameObject.GetComponent<GhostDead>() == null)
+            {
+                if (collision.gameObject.GetComponent<GhostBomb>() != null)
+                    collision.gameObject.GetComponent<GhostBomb>().PreventExplosion();
+                source.pitch = 0.93f + FindObjectOfType<GameManager>().ghostMultiplier / 15f;
+                source.PlayOneShot(bonkSound, 0.7f);
+                FindObjectOfType<GameManager>().GhostEaten(collision.gameObject.GetComponent<Ghost>());
+            }
+        }
     }
 }

@@ -12,13 +12,19 @@ public class GhostDead : GhostBehavior
         frightenable = false;
 
         //Freeze ghosts, then unfreeze after 3 seconds.
+        ghost.eyesSprite.enabled = false;
+        ghost.bodySprite.enabled = false;
+        ghost.blueSprite.enabled = false;
+        ghost.whiteSprite.enabled = false;
+        ghost.pacman.SetSprite(false);
         FindObjectOfType<GameManager>().FreezeAll();
 
-        Invoke(nameof(EyesMode), 0.5f);
+        Invoke(nameof(EyesMode), 1f);
     }
     void EyesMode()
     {
         FindObjectOfType<GameManager>().UnfreezeAll();
+        ghost.pacman.SetSprite(true);
 
         //Disable hitbox
         ghost.movement.collider.enabled = false;
@@ -45,7 +51,7 @@ public class GhostDead : GhostBehavior
         Vector3 position = transform.position;
 
         float elapsed = 0f;
-        float animDuration = 1.5f;
+        float animDuration = duration;
 
         //Explicity set position to animate ghost exiting while ignoring collisions
         while (elapsed < animDuration)
