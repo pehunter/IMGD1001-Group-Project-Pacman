@@ -17,6 +17,7 @@ public class GhostHome : GhostBehavior
     private void Update()
     {
         timeSinceStart += Time.deltaTime;
+        ghost.Bob(); 
 
         if (!finished && gameObject.activeInHierarchy && timeSinceStart > duration)
         {
