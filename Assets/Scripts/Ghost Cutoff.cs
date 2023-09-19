@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
-public class GhostChase : GhostBehavior
+public class GhostCutoff : GhostBehavior
 {
     protected override void OnNode(List<Vector2> node)
     {
@@ -14,8 +15,13 @@ public class GhostChase : GhostBehavior
         float minDist = 1000;
         Vector2 newDirection = Vector2.zero;
         foreach(Vector2 dir in node) {
-            //Get distance from 1 unit in this direction to pacman
-            float dist = (dir + new Vector2(transform.position.x, transform.position.y) - new Vector2(ghost.pacman.transform.position.x, ghost.pacman.transform.position.y)).magnitude;
+            //Target point is a bit infront of pacman
+            var infront = Physics2D.Raycast(new Vector2(ghost.pacman.transform.position.x, ghost.pacman.transform.position.y), ghost.pacman.movement.direction, 50f, ghost.movement.obstacleLayer);
+            Vector2 target = infront.point;
+            var template = Instantiate(test);
+            template.transform.position = new Vector3(target.x, target.y, -1);
+            //Get distance from 1 unit in this direction to target
+            float dist = (dir + new Vector2(transform.position.x, transform.position.y) - target).magnitude;
 
             //If this direction is closer than the last minimum, make this the new minimum
             //And don't move in reverse!

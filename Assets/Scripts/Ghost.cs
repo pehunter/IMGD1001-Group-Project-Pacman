@@ -18,6 +18,8 @@ public class Ghost : MonoBehaviour
     //How long it takes the ghost to respawn
     public float respawnTime;
 
+    public GameObject test;
+
     //Currently set behavior
     private GhostBehavior currentBehavior;
 
@@ -103,6 +105,7 @@ public class Ghost : MonoBehaviour
             needToUpdate = false;
             var behavior = (GhostBehavior)gameObject.AddComponent(nextBehavior);
             behavior.duration = nextDuration;
+            behavior.test = test;
         }
     }
 

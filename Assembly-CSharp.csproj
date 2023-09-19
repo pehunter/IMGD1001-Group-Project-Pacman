@@ -73,9 +73,11 @@
     <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\Ghost Home.cs" />
     <Compile Include="Assets\Scripts\Pacman.cs" />
+    <Compile Include="Assets\Scripts\Ghost Cutoff.cs" />
     <Compile Include="Assets\Scripts\Ghost Chase.cs" />
     <Compile Include="Assets\Scripts\GhostBomb.cs" />
     <Compile Include="Assets\Scripts\GhostEyes.cs" />
+    <Compile Include="Assets\Scripts\DecayObject.cs" />
     <Compile Include="Assets\Scripts\Pellet.cs" />
     <Compile Include="Assets\Scripts\Ghost Dead.cs" />
     <Compile Include="Assets\Scripts\Scroller.cs" />

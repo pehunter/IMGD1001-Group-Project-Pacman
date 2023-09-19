@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 337409717183114515, guid: 401864b498220984faf7d22b12831def, type: 3}
+      propertyPath: speed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 512266867564284523, guid: 401864b498220984faf7d22b12831def, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -171,5 +175,4 @@ MonoBehaviour:
   center: {fileID: 21300000, guid: 6381e3ee3ba4f454b921618656a92fa3, type: 3}
   middle: {fileID: 21300000, guid: 6f51e42bf59063c4ab7a5608a42bd23d, type: 3}
   tip: {fileID: 21300000, guid: d5e15c75b88558b469ecc97990cce215, type: 3}
-  flashSpeed: 0.5
   begin: 0
