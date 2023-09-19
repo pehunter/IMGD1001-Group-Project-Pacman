@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     List<PelletBomb> bombs;
     List<GameObject> explosions;
+    private bool gameNotEnding = true;
 
     //Multiplier that increases for every ghost ate
     public int ghostMultiplier { get; private set; } = 1;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     public void Update()
     {
         //If out of lives and input is received, start a new game.
-        if(this.lives <= 0 && Input.anyKeyDown)
+        if(this.lives <= 0 && gameNotEnding && Input.anyKeyDown)
         {
             NewGame();
         }
@@ -122,6 +123,7 @@ public class GameManager : MonoBehaviour
 
         if (score > highScore)
             SetHighScore(score);
+        gameNotEnding = true;
     }
 
     //Set score
@@ -144,6 +146,7 @@ public class GameManager : MonoBehaviour
         if (!pacman.frozen)
         {
             this.lives = newLives;
+            Debug.Log(newLives);
             //Add/remove lives from UI until it maches
             int lifeElapsed = lifeContainer.transform.childCount;
 
@@ -152,7 +155,7 @@ public class GameManager : MonoBehaviour
             {
                 var newLife = Instantiate(lifeIcon);
                 newLife.transform.SetParent(lifeContainer.transform, false);
-                newLife.GetComponent<RectTransform>().anchoredPosition = new Vector2(24 * lifeElapsed, 0);
+                newLife.GetComponent<RectTransform>().anchoredPosition = new Vector2(newLife.GetComponent<RectTransform>().rect.width * lifeElapsed, 0);
                 //newLife.GetComponent<RectTransform>().localScale = new Vector3(-1, 1, 1);
                 lifeElapsed++;
             }
@@ -160,8 +163,8 @@ public class GameManager : MonoBehaviour
             //Remove
             while (lifeElapsed > newLives)
             {
-                Destroy(lifeContainer.transform.GetChild(lifeElapsed - 1).gameObject);
                 lifeElapsed--;
+                Destroy(lifeContainer.transform.GetChild(lifeElapsed).gameObject);
             }
 
         }
@@ -178,7 +181,7 @@ public class GameManager : MonoBehaviour
         {
             var newBomb = Instantiate(bombIcon);
             newBomb.transform.SetParent(bombContainer.transform, false);
-            newBomb.GetComponent<RectTransform>().anchoredPosition = new Vector2(-24 * bombsDrawn, 0);
+            newBomb.GetComponent<RectTransform>().anchoredPosition = new Vector2(newBomb.GetComponent<RectTransform>().rect.width * bombsDrawn, 0);
             //newLife.GetComponent<RectTransform>().localScale = new Vector3(-1, 1, 1);
             bombsDrawn++;
         }
@@ -218,7 +221,7 @@ public class GameManager : MonoBehaviour
         ghostMultiplier++;
 
         //Eat ghost
-        ghost.swapBehavior(typeof(GhostDead), 0);
+        ghost.swapBehavior(typeof(GhostDead), ghost.respawnTime);
     }
 
     //Freeze everything
@@ -245,10 +248,16 @@ public class GameManager : MonoBehaviour
         pacman.Unfreeze();
     }
 
-    public void PacmanEaten() { 
+    public void PacmanEaten() {
         //pacman.gameObject.SetActive(false);
+        if (pacman.frozen)
+            return;
 
         SetLives(lives - 1);
+
+        foreach(Ghost g in ghosts)
+            if (g.gameObject.GetComponent<GhostBomb>() != null)
+                g.gameObject.GetComponent<GhostBomb>().PreventExplosion();
 
         FreezeAll();
         pacman.Die();
@@ -258,6 +267,7 @@ public class GameManager : MonoBehaviour
             Invoke(nameof(ResetState), 4f);
         } else
         {
+            gameNotEnding = false;
             Invoke(nameof(GameOver), 4f);
         }
     }

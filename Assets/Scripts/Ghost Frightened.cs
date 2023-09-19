@@ -48,7 +48,7 @@ public class GhostFrightened : GhostBehavior
         eaten = true;
 
         //Set behavior to dead
-        ghost.swapBehavior(typeof(GhostDead), 0);
+        ghost.swapBehavior(typeof(GhostDead), ghost.respawnTime);
     }
 
     //Move away from pacman
