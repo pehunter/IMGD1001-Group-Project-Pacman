@@ -40,6 +40,13 @@ public class Ghost : MonoBehaviour
 
     public bool frozen;
 
+    //variables for ghost bobbing 
+    //time in frames
+    private int pauseTime = 240;
+    private int timer;
+    private bool pauseBob;
+    private string bobDirection;
+
     //Renderers for each part of the ghost
     public SpriteRenderer bodySprite { get; private set; }
     public SpriteRenderer eyesSprite {get; private set;}
@@ -69,6 +76,10 @@ public class Ghost : MonoBehaviour
         bodyAnimation = body.GetComponent<SpriteAnimator>();
         whiteAnimation = white.GetComponent<SpriteAnimator>();
         blueAnimation = blue.GetComponent<SpriteAnimator>();
+
+        timer = 0;
+        bobDirection = "up";
+        pauseBob = true;
     }
 
     public void ResetState()
@@ -145,6 +156,46 @@ public class Ghost : MonoBehaviour
         // Keep the z-position the same since it determines draw depth
         position.z = transform.position.z;
         transform.position = position;
+    }
+
+    //bob up and down while in Home 
+    public void Bob()
+    {
+        //counts frames until it's time to move again
+        if (pauseBob)
+        {
+            timer += 1; 
+            if(timer >= pauseTime)
+            {
+                timer = 0;
+                pauseBob = false; 
+            }
+        }
+        else
+        {
+            if(bobDirection == "up")
+            {
+                this.transform.position += new Vector3(0, 0.1f, 0);
+                //this.SetPosition(new Vector3(this.transform.position.x, this.transform.position.y - 0.02f, this.transform.position.z));
+                if (this.transform.position.y >= 0)
+                {
+                    bobDirection = "down";
+                    pauseBob = true;
+                    timer = 0;
+                }
+            }
+            if(bobDirection == "down")
+            {
+                this.transform.position += new Vector3(0, -0.1f, 0);
+                //this.SetPosition(new Vector3(this.transform.position.x, this.transform.position.y - 0.02f, this.transform.position.z));
+                if (this.transform.position.y <= -1)
+                {
+                    bobDirection = "up";
+                    pauseBob = true;
+                    timer = 0;
+                }
+            }
+        }
     }
 
     //Freeze the ghost in place
