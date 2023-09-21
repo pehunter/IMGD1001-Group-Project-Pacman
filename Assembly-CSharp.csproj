@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\Splash Loader.cs" />
+    <Compile Include="Assets\Scripts\BreakableWall.cs" />
     <Compile Include="Assets\Scripts\Ghost Behavior.cs" />
     <Compile Include="Assets\Scripts\Warp.cs" />
     <Compile Include="Assets\Scripts\Ghost Frightened.cs" />

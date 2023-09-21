@@ -41,9 +41,9 @@ public class Ghost : MonoBehaviour
     public bool frozen;
 
     //variables for ghost bobbing 
-    //time in frames
-    private int pauseTime = 240;
-    private int timer;
+    //bobSpeed -> multiply this by timedelta to get rise-fall speed
+    private float bobSpeed = 0.9f;
+    private float timer;
     private bool pauseBob;
     private string bobDirection;
 
@@ -126,6 +126,8 @@ public class Ghost : MonoBehaviour
         //Do not update behavior if in home state still!
         //Remove current behavior
         Destroy(gameObject.GetComponent<GhostBehavior>());
+        body.transform.localPosition = Vector3.zero;
+        eyes.transform.localPosition = new Vector3(0,0,-1);
 
         //Add new behavior if it is a GhostBehavior, and set duration.
         if (behavior.BaseType == typeof(GhostBehavior))
@@ -159,41 +161,35 @@ public class Ghost : MonoBehaviour
     }
 
     //bob up and down while in Home 
-    public void Bob()
+    public void Bob(float timeDelta)
     {
         //counts frames until it's time to move again
-        if (pauseBob)
+        if(bobDirection == "up")
         {
-            timer += 1; 
-            if(timer >= pauseTime)
+            body.transform.localPosition += new Vector3(0, timeDelta*bobSpeed, 0);
+            eyes.transform.localPosition = body.transform.localPosition + new Vector3(0, 0, -1);
+            movement.nextDirection = Vector2.up;
+            movement.SetDirection(true);
+            //this.SetPosition(new Vector3(this.transform.position.x, this.transform.position.y - 0.02f, this.transform.position.z));
+            if (body.transform.localPosition.y >= 0.5)
             {
+                bobDirection = "down";
+                pauseBob = true;
                 timer = 0;
-                pauseBob = false; 
             }
         }
-        else
+        if(bobDirection == "down")
         {
-            if(bobDirection == "up")
+            body.transform.localPosition += new Vector3(0, -timeDelta * bobSpeed, 0);
+            eyes.transform.localPosition = body.transform.localPosition + new Vector3(0,0,-1);
+            movement.nextDirection = Vector2.down;
+            movement.SetDirection(true);
+            //this.SetPosition(new Vector3(this.transform.position.x, this.transform.position.y - 0.02f, this.transform.position.z));
+            if (body.transform.localPosition.y <= -0.5)
             {
-                this.transform.position += new Vector3(0, 0.1f, 0);
-                //this.SetPosition(new Vector3(this.transform.position.x, this.transform.position.y - 0.02f, this.transform.position.z));
-                if (this.transform.position.y >= 0)
-                {
-                    bobDirection = "down";
-                    pauseBob = true;
-                    timer = 0;
-                }
-            }
-            if(bobDirection == "down")
-            {
-                this.transform.position += new Vector3(0, -0.1f, 0);
-                //this.SetPosition(new Vector3(this.transform.position.x, this.transform.position.y - 0.02f, this.transform.position.z));
-                if (this.transform.position.y <= -1)
-                {
-                    bobDirection = "up";
-                    pauseBob = true;
-                    timer = 0;
-                }
+                bobDirection = "up";
+                pauseBob = true;
+                timer = 0;
             }
         }
     }

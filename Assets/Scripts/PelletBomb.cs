@@ -152,6 +152,11 @@ public class PelletBomb : MonoBehaviour
     {
         //Check for obstacles from entity, slightly in desired direction. If no obstacles are present, then spot is free.
         RaycastHit2D cast = Physics2D.BoxCast(position, Vector2.one * 0.5f, 0f, Vector2.zero, 0f, obstacleLayer);
+        if (cast.collider != null && cast.collider.gameObject.layer == LayerMask.NameToLayer("Obstacle") && cast.collider.gameObject.GetComponent<BreakableWall>() != null)
+        {
+            cast.collider.gameObject.GetComponent<BreakableWall>().Break();
+            cast = Physics2D.BoxCast(position, Vector2.one * 0.5f, 0f, Vector2.zero, 0f, obstacleLayer);
+        }
         Debug.Log(cast.collider != null);
         return cast.collider != null;
     }
