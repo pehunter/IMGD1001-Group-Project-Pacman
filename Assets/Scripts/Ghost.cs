@@ -18,6 +18,8 @@ public class Ghost : MonoBehaviour
     //How long it takes the ghost to respawn
     public float respawnTime;
 
+    public GameObject test;
+
     //Currently set behavior
     private GhostBehavior currentBehavior;
 
@@ -37,6 +39,13 @@ public class Ghost : MonoBehaviour
     public GameObject white;
 
     public bool frozen;
+
+    //variables for ghost bobbing 
+    //bobSpeed -> multiply this by timedelta to get rise-fall speed
+    private float bobSpeed = 0.9f;
+    private float timer;
+    private bool pauseBob;
+    private string bobDirection;
 
     //Renderers for each part of the ghost
     public SpriteRenderer bodySprite { get; private set; }
@@ -67,6 +76,10 @@ public class Ghost : MonoBehaviour
         bodyAnimation = body.GetComponent<SpriteAnimator>();
         whiteAnimation = white.GetComponent<SpriteAnimator>();
         blueAnimation = blue.GetComponent<SpriteAnimator>();
+
+        timer = 0;
+        bobDirection = "up";
+        pauseBob = true;
     }
 
     public void ResetState()
@@ -103,6 +116,7 @@ public class Ghost : MonoBehaviour
             needToUpdate = false;
             var behavior = (GhostBehavior)gameObject.AddComponent(nextBehavior);
             behavior.duration = nextDuration;
+            behavior.test = test;
         }
     }
 
@@ -112,6 +126,8 @@ public class Ghost : MonoBehaviour
         //Do not update behavior if in home state still!
         //Remove current behavior
         Destroy(gameObject.GetComponent<GhostBehavior>());
+        body.transform.localPosition = Vector3.zero;
+        eyes.transform.localPosition = new Vector3(0,0,-1);
 
         //Add new behavior if it is a GhostBehavior, and set duration.
         if (behavior.BaseType == typeof(GhostBehavior))
@@ -142,6 +158,40 @@ public class Ghost : MonoBehaviour
         // Keep the z-position the same since it determines draw depth
         position.z = transform.position.z;
         transform.position = position;
+    }
+
+    //bob up and down while in Home 
+    public void Bob(float timeDelta)
+    {
+        //counts frames until it's time to move again
+        if(bobDirection == "up")
+        {
+            body.transform.localPosition += new Vector3(0, timeDelta*bobSpeed, 0);
+            eyes.transform.localPosition = body.transform.localPosition + new Vector3(0, 0, -1);
+            movement.nextDirection = Vector2.up;
+            movement.SetDirection(true);
+            //this.SetPosition(new Vector3(this.transform.position.x, this.transform.position.y - 0.02f, this.transform.position.z));
+            if (body.transform.localPosition.y >= 0.5)
+            {
+                bobDirection = "down";
+                pauseBob = true;
+                timer = 0;
+            }
+        }
+        if(bobDirection == "down")
+        {
+            body.transform.localPosition += new Vector3(0, -timeDelta * bobSpeed, 0);
+            eyes.transform.localPosition = body.transform.localPosition + new Vector3(0,0,-1);
+            movement.nextDirection = Vector2.down;
+            movement.SetDirection(true);
+            //this.SetPosition(new Vector3(this.transform.position.x, this.transform.position.y - 0.02f, this.transform.position.z));
+            if (body.transform.localPosition.y <= -0.5)
+            {
+                bobDirection = "up";
+                pauseBob = true;
+                timer = 0;
+            }
+        }
     }
 
     //Freeze the ghost in place

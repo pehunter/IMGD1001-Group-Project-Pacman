@@ -37,7 +37,7 @@ public class GhostBomb : PelletBomb
             } else
             {
                 ghost.bodySprite.enabled = true;
-                //ghost.eyesSprite.enabled = true;
+                ghost.eyesSprite.enabled = true;
                 ghost.whiteSprite.enabled = false;
             }
         }

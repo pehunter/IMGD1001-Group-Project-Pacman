@@ -443,6 +443,7 @@ MonoBehaviour:
   initialBehavior: GhostHome
   initialDuration: 2
   respawnTime: 5
+  test: {fileID: 4448106381424581465, guid: cd026e20679758a40b210cf589df267a, type: 3}
   inside: {fileID: 0}
   outside: {fileID: 0}
   body: {fileID: 1744116564775522674}

@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\Splash Loader.cs" />
+    <Compile Include="Assets\Scripts\BreakableWall.cs" />
     <Compile Include="Assets\Scripts\Ghost Behavior.cs" />
     <Compile Include="Assets\Scripts\Warp.cs" />
     <Compile Include="Assets\Scripts\Ghost Frightened.cs" />
@@ -73,9 +74,11 @@
     <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\Ghost Home.cs" />
     <Compile Include="Assets\Scripts\Pacman.cs" />
+    <Compile Include="Assets\Scripts\Ghost Cutoff.cs" />
     <Compile Include="Assets\Scripts\Ghost Chase.cs" />
     <Compile Include="Assets\Scripts\GhostBomb.cs" />
     <Compile Include="Assets\Scripts\GhostEyes.cs" />
+    <Compile Include="Assets\Scripts\DecayObject.cs" />
     <Compile Include="Assets\Scripts\Pellet.cs" />
     <Compile Include="Assets\Scripts\Ghost Dead.cs" />
     <Compile Include="Assets\Scripts\Scroller.cs" />
