@@ -20,14 +20,14 @@ public class Scroller : MonoBehaviour
         //0 is the highest y the camera is allowed to get to, so when the player gets there they can no longer scroll up. 
         if (Input.GetKey(KeyCode.W) && this.transform.position.y < 0)
         {
-            // each frame the player holds W, the camera moves up 0.02. 
-            this.transform.position = new Vector3(0, yFloat + 0.02f, -10);
+            // each frame the player holds W, the camera moves up 0.08. 
+            this.transform.position = new Vector3(0, yFloat + 0.08f, -10);
         }
         //ditto here, floor is as low as it goes so once the player gets there they can't scroll down. 
         else if (Input.GetKey(KeyCode.S) && this.transform.position.y > floor)
         {
-            // each frame the player holds D, the camera moves down 0.02. 
-            this.transform.position = new Vector3(0, yFloat - 0.02f, -10);
+            // each frame the player holds D, the camera moves down 0.08. 
+            this.transform.position = new Vector3(0, yFloat - 0.08f, -10);
         }
     }
 }

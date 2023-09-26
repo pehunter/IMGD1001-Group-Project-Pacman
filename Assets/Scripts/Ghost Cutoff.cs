@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class GhostCutoff : GhostBehavior
 {
@@ -18,8 +17,8 @@ public class GhostCutoff : GhostBehavior
             //Target point is a bit infront of pacman
             var infront = Physics2D.Raycast(new Vector2(ghost.pacman.transform.position.x, ghost.pacman.transform.position.y), ghost.pacman.movement.direction, 50f, ghost.movement.obstacleLayer);
             Vector2 target = infront.point;
-            var template = Instantiate(test);
-            template.transform.position = new Vector3(target.x, target.y, -1);
+            //var template = Instantiate(test);
+            //template.transform.position = new Vector3(target.x, target.y, -1);
             //Get distance from 1 unit in this direction to target
             float dist = (dir + new Vector2(transform.position.x, transform.position.y) - target).magnitude;
 

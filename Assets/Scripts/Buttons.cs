@@ -15,7 +15,7 @@ public class Buttons : MonoBehaviour
     //scene for modified game
     public void LaunchVariant()
     {
-        SceneManager.LoadScene("ModdedGame");
+        SceneManager.LoadScene("LevelSelect");
     }
 
     //scene for credits screen

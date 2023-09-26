@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Game Manager.cs" />
     <Compile Include="Assets\Scripts\Flash.cs" />
     <Compile Include="Assets\Scripts\Pellet Bomb Giver.cs" />
+    <Compile Include="Assets\Scripts\LevelSelect.cs" />
     <Compile Include="Assets\Scripts\Ghost.cs" />
     <Compile Include="Assets\Scripts\Sprite Animator.cs" />
     <Compile Include="Assets\Scripts\Power Pellet.cs" />

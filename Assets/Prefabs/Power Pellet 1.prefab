@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 500
-  bombs: 2
+  bombs: 3
 --- !u!114 &8263244197776317573
 MonoBehaviour:
   m_ObjectHideFlags: 0

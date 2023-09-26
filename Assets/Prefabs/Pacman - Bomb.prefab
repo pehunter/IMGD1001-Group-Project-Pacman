@@ -8,13 +8,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 524108442973598422, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
+      propertyPath: sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f0ea131bb014c34ba7b4f1e67e32d73, type: 3}
+    - target: {fileID: 524108442973598422, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
+      propertyPath: sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e5554e05bca3424a99a3cbc9ea74420, type: 3}
+    - target: {fileID: 524108442973598422, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
+      propertyPath: sprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f0ea131bb014c34ba7b4f1e67e32d73, type: 3}
+    - target: {fileID: 524108442973598422, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
+      propertyPath: sprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 98e7aed958782524381670f00c9c11e5, type: 3}
     - target: {fileID: 2288319308816997568, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
       propertyPath: m_Name
-      value: Pacman
+      value: Pacman - Bomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4296498535877858923, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4296498535877858923, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f0ea131bb014c34ba7b4f1e67e32d73, type: 3}
+    - target: {fileID: 6325540731255226075, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
+      propertyPath: speed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7617461442664312553, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7617461442664312553, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22,11 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7617461442664312553, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -8.5
       objectReference: {fileID: 0}
     - target: {fileID: 7617461442664312553, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 7617461442664312553, guid: ce9d28bfd4bf18643a2e3fbac67c062f, type: 3}
       propertyPath: m_LocalRotation.w

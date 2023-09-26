@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -320}
+  m_AnchoredPosition: {x: 0, y: -900}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &200479949
@@ -194,7 +194,14 @@ MonoBehaviour:
     a new ghost type \ncalled \"explode ghost\", which is a\n ghost that will create
     an \nexplosion after a period of time.\n\nAdded custom sprites for explode ghosts.\n\nAdded
     UI, which visualizes score, life count,\nand bomb count.\n\nWhen a ghost is eaten,
-    its score is now displayed.\n\nFixed some old bugs\n\nIntroduced new bugs"
+    its score is now displayed.\n\nFixed some old bugs\n\nIntroduced new bugs\n\n--
+    Version 0.0.1.0s3 --\n\nFixed some old bugs\n\nRemade AI, which now no longer
+    relies on nodes.\nAlso, the pink ghost now follows ahead of Pacman.\n\nBombs
+    now detonate faster, explode shorter, and\nblock ghosts from moving.\n\nGhosts
+    now bob up and down in home.\n\nReplaced Pacman, ghost eyes, and explosion sprites\nwith
+    custom graphics. Logo was also replaced.\n\nAdded support for additional levels,
+    along with\na level select screen.\n\nAdded a new level. It's not very good.\n\nAdded
+    breakable tiles. When an explosion hits them,\nthey are destroyed."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a9cab8cde7452db45829cbd31bce388a, type: 2}
   m_sharedMaterial: {fileID: 6116094958838382817, guid: a9cab8cde7452db45829cbd31bce388a, type: 2}
@@ -472,7 +479,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 0}
+  m_BackGroundColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -525,7 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd59f9245a77e149ac39e7ed20629a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floor: -19
+  floor: -45
 --- !u!81 &1256419273
 AudioListener:
   m_ObjectHideFlags: 0
