@@ -14,6 +14,7 @@ public class Ghost : MonoBehaviour
     //Starting behavior for this ghost
     public string initialBehavior;
     public float initialDuration;
+    public float initialSpeed;
 
     //How long it takes the ghost to respawn
     public float respawnTime;
@@ -80,6 +81,7 @@ public class Ghost : MonoBehaviour
         timer = 0;
         bobDirection = "up";
         pauseBob = true;
+        initialSpeed = movement.speed;
     }
 
     public void ResetState()

@@ -7,6 +7,8 @@ public class PelletBomb : MonoBehaviour
 {
     //How long it takes for this pellet bomb to detonate
     public float duration;
+    protected float elapsedTime;
+    protected bool passedHalf;
 
     //How fast explosion tiles are created
     public float explosionSpeed;
@@ -47,15 +49,26 @@ public class PelletBomb : MonoBehaviour
     {
         directions = new List<Vector2>() { Vector2.zero };
         explosionTiles = new List<GameObject>();
-        //When duration is half complete, flash sprite faster.
-        Invoke(nameof(Halftime), duration / 2);
+        passedHalf = false;
+    }
+
+    private void Update()
+    {
+        if (!frozen)
+        {
+            elapsedTime += Time.deltaTime;
+            if (!exploding && elapsedTime > duration)
+                Explode();
+            else if (!passedHalf && elapsedTime > duration / 2)
+                Halftime();
+        }
     }
 
     protected virtual void Halftime()
     {
         var animator = GetComponent<SpriteAnimator>();
         animator.NewDuration(animator.animationSpeed / 2);
-        Invoke(nameof(Explode), duration / 2);
+        passedHalf = true;
     }
 
     protected virtual bool PreExplode()

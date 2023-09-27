@@ -8,6 +8,10 @@ public class GhostDead : GhostBehavior
 {
     private void Start()
     {
+        //If ghost is a bomb layer, disable that.
+        if (gameObject.GetComponent<BombLayer>() != null)
+            gameObject.GetComponent<BombLayer>().begin = false;
+
         //Disable frightening
         frightenable = false;
 

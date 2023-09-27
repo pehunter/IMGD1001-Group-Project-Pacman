@@ -32,7 +32,7 @@ public abstract class GhostBehavior : MonoBehaviour
         frightenable = true;
     }
 
-    protected void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         elapsedTime += Time.fixedDeltaTime;
         if (elapsedTime > aiRefreshRate)
@@ -90,7 +90,11 @@ public abstract class GhostBehavior : MonoBehaviour
                 ghost.swapBehavior(typeof(GhostScatter), 0);
                 break;
             case "Pink":
+            case "HotPink":
                 ghost.swapBehavior(typeof(GhostCutoff), 0);
+                break;
+            case "Yellow":
+                ghost.swapBehavior(typeof(GhostZoom), 0);
                 break;
             default:
                 ghost.swapBehavior(typeof(GhostChase), 0);

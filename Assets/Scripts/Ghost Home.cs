@@ -73,6 +73,10 @@ public class GhostHome : GhostBehavior
         if (gameObject.GetComponent<GhostBomb>() != null)
             gameObject.GetComponent<GhostBomb>().begin = true;
 
+        //If ghost is a bomb layer, enable that.
+        if (gameObject.GetComponent<BombLayer>() != null)
+            gameObject.GetComponent<BombLayer>().begin = true;
+
         //Pass behavior
         GhostBehavior.switchBehavior(ghost);
     }

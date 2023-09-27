@@ -74,6 +74,9 @@
     <Compile Include="Assets\Scripts\Power Pellet.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
+    <Compile Include="Assets\Scripts\BombLayer.cs" />
+    <Compile Include="Assets\Scripts\Color Changer.cs" />
+    <Compile Include="Assets\Scripts\Ghost Zoom.cs" />
     <Compile Include="Assets\Scripts\Ghost Home.cs" />
     <Compile Include="Assets\Scripts\Pacman.cs" />
     <Compile Include="Assets\Scripts\Ghost Cutoff.cs" />

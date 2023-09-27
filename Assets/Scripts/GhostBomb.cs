@@ -10,9 +10,7 @@ public class GhostBomb : PelletBomb
     private Ghost ghost;
 
     private bool onFlash = false;
-    bool passedHalf = false;
     private float initialFlash;
-    private float elapsedTime = 0;
     public bool begin = false;
     private bool running = false;
     private void Update()
