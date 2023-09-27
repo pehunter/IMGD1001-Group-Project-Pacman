@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Ghost Frightened.cs" />
     <Compile Include="Assets\Scripts\Game Manager.cs" />
     <Compile Include="Assets\Scripts\Flash.cs" />
+    <Compile Include="Assets\Scripts\BonusFruit.cs" />
     <Compile Include="Assets\Scripts\Pellet Bomb Giver.cs" />
     <Compile Include="Assets\Scripts\LevelSelect.cs" />
     <Compile Include="Assets\Scripts\Ghost.cs" />

@@ -11,10 +11,19 @@ public class BreakableWall : MonoBehaviour
         walls.Add(gameObject);
     }
 
+    public void ResetState()
+    {
+        foreach (var wall in walls)
+            wall.SetActive(true);
+    }
+
     //Break related gameobjects
     public void Break()
     {
-        foreach(var wall in walls)
-            Destroy(wall);
+        foreach (var wall in walls)
+        {
+            wall.SetActive(false);
+            FindObjectOfType<GameManager>().AddDestroyedWall(wall.GetComponent<BreakableWall>());
+        }
     }
 }

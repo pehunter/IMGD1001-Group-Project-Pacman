@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public Ghost[] ghosts;
     public Pacman pacman;
     public Transform pellets;
+    protected HashSet<BreakableWall> walls = new HashSet<BreakableWall>();
+    public BonusFruit fruit;
 
     //UI
     public TextMeshProUGUI scoreDisplay;
@@ -75,6 +77,18 @@ public class GameManager : MonoBehaviour
         ResetState();
     }
 
+    private void ResetBombs()
+    {
+        //Remove all bombs and explosions
+        foreach (PelletBomb bomb in bombs)
+            if (bomb != null && bomb.gameObject != null)
+                Destroy(bomb.gameObject);
+
+        foreach (GameObject explo in explosions)
+            if (explo != null)
+                Destroy(explo.gameObject);
+    }
+
     //Reset ghosts & pacman to how they are at round start
     private void ResetState()
     {
@@ -85,14 +99,11 @@ public class GameManager : MonoBehaviour
             ghosts[i].ResetState();
         }
 
-        //Remove all bombs and explosions
-        foreach (PelletBomb bomb in bombs)
-            if (bomb != null && bomb.gameObject != null)
-                Destroy(bomb.gameObject);
+        //Unbreak walls
+        foreach (BreakableWall wall in this.walls)
+            wall.ResetState();
 
-        foreach (GameObject explo in explosions)
-            if (explo != null)
-                Destroy(explo.gameObject);
+        ResetBombs();
 
         UnfreezeAll();
 
@@ -123,6 +134,7 @@ public class GameManager : MonoBehaviour
 
         if (score > highScore)
             SetHighScore(score);
+        fruit.ResetState();
         gameNotEnding = true;
     }
 
@@ -202,19 +214,30 @@ public class GameManager : MonoBehaviour
             Destroy(incScore);
     }
 
+    private void createIncScore(Vector2 pos, int points)
+    {
+        //Insert an incoming score at ghost location
+        if (incScore != null)
+            Destroy(incScore);
+        incScore = Instantiate(incomingScore);
+        incScore.GetComponent<TextMeshPro>().text = points.ToString();
+        incScore.transform.position = new Vector3(pos.x, pos.y, -6);
+        Invoke(nameof(RemoveIncScore), 1.0f);
+    }
+
+    public void BonusFruitEaten(Vector3 pos, int points)
+    {
+        createIncScore(new Vector2(pos.x, pos.y), points);
+        SetScore(score + points);
+    }
+
     //Handle Pacman eating a ghost
     public void GhostEaten(Ghost ghost)
     {
         //Calculate points based on ghost multiplier
         int points = ghost.points * ghostMultiplier;
 
-        //Insert an incoming score at ghost location
-        if (incScore != null)
-            Destroy(incScore);
-        incScore = Instantiate(incomingScore);
-        incScore.GetComponent<TextMeshPro>().text = points.ToString();
-        incScore.transform.position = new Vector3(ghost.transform.position.x, ghost.transform.position.y, -6);
-        Invoke(nameof(RemoveIncScore), 1.0f);
+        createIncScore(new Vector2(ghost.transform.position.x, ghost.transform.position.y), points);
 
         SetScore(score + points);
 
@@ -253,6 +276,8 @@ public class GameManager : MonoBehaviour
         if (pacman.frozen)
             return;
 
+        ResetBombs();
+
         SetLives(lives - 1);
 
         foreach(Ghost g in ghosts)
@@ -282,12 +307,20 @@ public class GameManager : MonoBehaviour
         //If the gameboard is empty, disable pacman and start new round.
         if (!HasRemainingPellets())
         {
+            //Remove all bombs
+            ResetBombs();
+
             //Freeze everything
             FreezeAll();
 
             //Start new round
             Invoke(nameof(NewRound), 4f);
         }
+    }
+
+    public void AddDestroyedWall(BreakableWall wall)
+    {
+        walls.Add(wall);
     }
 
     public void GMPInvoke(float duration)
