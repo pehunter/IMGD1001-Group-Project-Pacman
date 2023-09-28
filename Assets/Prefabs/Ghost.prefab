@@ -318,9 +318,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9208805168157555342}
   - component: {fileID: 315615217851323687}
-  - component: {fileID: 3084557589461404389}
   - component: {fileID: 4146206600386505673}
   - component: {fileID: 1634113722445468799}
+  - component: {fileID: 7671781345501727035}
   m_Layer: 7
   m_Name: Ghost
   m_TagString: Untagged
@@ -374,7 +374,51 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &3084557589461404389
+--- !u!114 &4146206600386505673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2253306913773381034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212d04703b6c98044a5e722140373ece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 7
+  speedMultiplier: 1
+  initialDirection: {x: 1, y: 0}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!114 &1634113722445468799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2253306913773381034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680d8bff19b6ab24b9ebc4602d90de0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 200
+  initialBehavior: GhostHome
+  initialDuration: 2
+  initialSpeed: 0
+  respawnTime: 5
+  test: {fileID: 4448106381424581465, guid: cd026e20679758a40b210cf589df267a, type: 3}
+  inside: {fileID: 0}
+  outside: {fileID: 0}
+  body: {fileID: 1744116564775522674}
+  eyes: {fileID: 6370320430419670569}
+  blue: {fileID: 2214603355021245903}
+  white: {fileID: 974311249453619119}
+  frozen: 0
+  pacman: {fileID: 0}
+--- !u!58 &7671781345501727035
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -409,49 +453,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &4146206600386505673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2253306913773381034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 212d04703b6c98044a5e722140373ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7
-  speedMultiplier: 1
-  initialDirection: {x: 1, y: 0}
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 512
---- !u!114 &1634113722445468799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2253306913773381034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 680d8bff19b6ab24b9ebc4602d90de0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  points: 200
-  initialBehavior: GhostHome
-  initialDuration: 2
-  respawnTime: 5
-  test: {fileID: 4448106381424581465, guid: cd026e20679758a40b210cf589df267a, type: 3}
-  inside: {fileID: 0}
-  outside: {fileID: 0}
-  body: {fileID: 1744116564775522674}
-  eyes: {fileID: 6370320430419670569}
-  blue: {fileID: 2214603355021245903}
-  white: {fileID: 974311249453619119}
-  frozen: 0
-  pacman: {fileID: 0}
 --- !u!1 &6370320430419670569
 GameObject:
   m_ObjectHideFlags: 0

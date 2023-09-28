@@ -29,9 +29,7 @@ public class GhostChase : GhostBehavior
 
         //Assign nextDirection
         ghost.movement.nextDirection = newDirection;
-        //if (ghost.movement.direction != newDirection)
-        //    elapsedTime = -0.4f;
-        //else
+
         elapsedTime = 0;
     }
 }

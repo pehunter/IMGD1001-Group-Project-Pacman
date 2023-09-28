@@ -10,6 +10,7 @@ public abstract class GhostBehavior : MonoBehaviour
     public float aiRefreshRate = 0.1f;
 
     protected float elapsedTime;
+    protected float giveUp = 2f;
 
     public GameObject test;
 
@@ -42,6 +43,9 @@ public abstract class GhostBehavior : MonoBehaviour
                 checkMovement(ghost.transform.position);
             //elapsedTime = 0f;
         }
+
+        if (elapsedTime > giveUp)
+            ghost.movement.nextDirection = Vector2.zero;
     }
 
     //Check which directions can be entered from given pos
@@ -82,15 +86,13 @@ public abstract class GhostBehavior : MonoBehaviour
     public static void switchBehavior(Ghost ghost)
     {
         //Cringe
-        switch (ghost.gameObject.name)
+        switch (ghost.gameObject.name.Split(new char[] { '_' })[0])
         {
             case "Cyan":
             case "Orange":
-            case "Orange - Bomber":
                 ghost.swapBehavior(typeof(GhostScatter), 0);
                 break;
             case "Pink":
-            case "HotPink":
                 ghost.swapBehavior(typeof(GhostCutoff), 0);
                 break;
             case "Yellow":
