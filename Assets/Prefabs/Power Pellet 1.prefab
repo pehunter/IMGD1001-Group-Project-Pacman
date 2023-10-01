@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 100
+  waka: {fileID: 8300000, guid: 91f9a808096a72840b623003cc40834b, type: 3}
   bombs: 3
 --- !u!114 &8263244197776317573
 MonoBehaviour:

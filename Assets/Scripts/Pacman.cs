@@ -16,8 +16,12 @@ public class Pacman : MonoBehaviour
     //How many bombs Pacman has
     public int bombs { get; private set; } = 0;
 
+    //Start time
+    public float startTime;
+
     //Pellet Bomb prefab
     public GameObject pelletBomb;
+    public AudioClip bombLay;
 
     //Components
     public Movement movement { get; private set; }
@@ -28,7 +32,7 @@ public class Pacman : MonoBehaviour
     public SpriteAnimator deathAnimator { get; private set; }
     
     //audio stuff
-    public AudioSource source;
+    //public AudioSource source;
     public AudioClip youDied;
 
 
@@ -41,13 +45,13 @@ public class Pacman : MonoBehaviour
         spriteRenderer = normal.GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
         animator = normal.GetComponent<SpriteAnimator>();
-        source = GetComponent<AudioSource>(); 
+        //source = GetComponent<AudioSource>(); 
 
         deathAnimator = dead.GetComponent<SpriteAnimator>();
         deathRenderer = dead.GetComponent <SpriteRenderer>();
 
         //start waka loop 
-        source.Play(); 
+        //source.Play(); 
     }
 
     // Update is called once per frame
@@ -78,13 +82,13 @@ public class Pacman : MonoBehaviour
             {
                 animator.Freeze();
                 //if the animator stops the waka loop pauses.. 
-                source.Pause(); 
+                //source.Pause(); 
             }
             else
             {
                 animator.Unfreeze();
                 //and if the animator unstops the waka loop unpauses! 
-                source.UnPause();
+                //source.UnPause();
             }
         }
     }
@@ -106,6 +110,10 @@ public class Pacman : MonoBehaviour
 
             bombs--;
             FindObjectOfType<GameManager>().SetBombs(bombs);
+
+            //Play sound
+            if (!VolumeManager.muted)
+                GetComponent<AudioSource>().PlayOneShot(bombLay);
         }
     }
 
@@ -131,12 +139,12 @@ public class Pacman : MonoBehaviour
         collider.enabled = true;
         movement.ResetState();
         gameObject.SetActive(true);
-        source.Play();
+        //source.Play();
     }
 
     public void Die()
     {
-        source.Stop();
+       // source.Stop();
         //Remain in frozen state for a second before death animation
         Invoke(nameof(ActuallyDie), 1f);
     }

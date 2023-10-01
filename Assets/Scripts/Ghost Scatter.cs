@@ -10,7 +10,7 @@ public class GhostScatter : GhostBehavior
         //Null-check
         base.OnNode(node);
 
-        if (node.Count == 0) return;
+        if (node.Count == 0 || (!ghost.movement.blocked && ghost.movement.nextDirection != ghost.movement.direction && ghost.movement.nextDirection != Vector2.zero)) return;
 
         //Pick random direction
         Vector2 newDirection = node[UnityEngine.Random.Range(0, node.Count)];

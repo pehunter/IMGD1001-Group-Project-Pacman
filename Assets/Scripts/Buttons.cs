@@ -5,7 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
-
+    public AudioSource sound;
+    //Play sound
+    public void playSound()
+    {
+        if (!VolumeManager.muted)
+            sound.Play();
+    }
     //scene for unmodified game 
     public void LaunchClassic()
     {
@@ -34,23 +40,27 @@ public class Buttons : MonoBehaviour
     public void DelayedClassic()
     {
         Invoke("LaunchClassic", 0.5f);
+        playSound();
     }
 
     //ditto for variant
     public void DelayedVariant()
     {
         Invoke("LaunchVariant", 0.5f);
+        playSound();
     }
 
     //ditto for credits 
     public void DelayedCredits()
     {
         Invoke("LaunchCredits", 0.5f);
+        playSound();
     }
 
     public void DelayedVNotes()
     {
         Invoke("LaunchVNotes", 0.5f);
+        playSound();
     }
 }
 

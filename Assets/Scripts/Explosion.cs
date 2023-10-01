@@ -39,7 +39,7 @@ public class Explosion : MonoBehaviour
     //Set the explosion with the given Sprite at the given Position and Rotation.
     public void Place(Sprite sprite, Vector3 position, float rotation)
     {
-        source.Play(); 
+        //source.Play(); 
         this.sprite.sprite = sprite;
         this.transform.position = position;
         this.transform.rotation = Quaternion.AngleAxis(rotation, Vector3.forward);

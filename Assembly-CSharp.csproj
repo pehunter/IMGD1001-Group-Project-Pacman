@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Sprite Animator.cs" />
     <Compile Include="Assets\Scripts\Power Pellet.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
+    <Compile Include="Assets\Scripts\VolumeManager.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\BombLayer.cs" />
     <Compile Include="Assets\Scripts\Color Changer.cs" />

@@ -29,7 +29,6 @@ public class PelletBomb : MonoBehaviour
     public LayerMask obstacleLayer;
     public LayerMask ghostLayer;
 
-
     public bool frozen { get; private set; } = false;
 
     //Prefab for explosion
@@ -87,6 +86,7 @@ public class PelletBomb : MonoBehaviour
             FindObjectOfType<GameManager>().GMPInvoke(length * explosionSpeed + explosionLife);
             //First entry: up/down/left/right are undefined, zero only vector inside.
             List<Vector2> newList = new List<Vector2>();
+            GameObject last = null;
             foreach (Vector2 direction in directions)
             {
                 if (frozen)
@@ -107,16 +107,24 @@ public class PelletBomb : MonoBehaviour
 
                     //Calculate sprite
                     Sprite exploSprite = middle;
+                    pos.z = -6f;
                     if (currentLength == 0)
+                    {
                         exploSprite = center;
+                        pos.z = -7f;
+                    }
                     else if (currentLength == length)
+                    {
                         exploSprite = tip;
+                        pos.z = -7f;
+                    }
 
                     var explo = Instantiate(explosion);
                     explo.GetComponent<Explosion>().explosionLife = explosionLife;
                     explo.GetComponent<Explosion>().Place(exploSprite, pos, rotation);
                     explo.GetComponent<Explosion>().bomb = this;
                     FindObjectOfType<GameManager>().AddExplosion(explo);
+                    last = explo;
 
                     //If not at end of length, add another tile in direction.
                     if (currentLength > 0 && currentLength < length)
@@ -132,12 +140,13 @@ public class PelletBomb : MonoBehaviour
             else
                 newList = directions;
             if (directions.Count > 0)
-                Invoke(nameof(Explode), explosionSpeed);
-            else
             {
-                Debug.Log("Ending now...");
-                OnEnd();
+                if(!VolumeManager.muted && last != null)
+                    last.GetComponent<AudioSource>().Play();
+                Invoke(nameof(Explode), explosionSpeed);
             }
+            else
+                OnEnd();
         }
     }
 

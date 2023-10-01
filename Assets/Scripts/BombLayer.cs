@@ -14,6 +14,8 @@ public class BombLayer : MonoBehaviour
     private Vector3 bombPos;
     public bool begin = false;
 
+    public AudioClip bombLay;
+
     private void Awake()
     {
         ghost = GetComponent<Ghost>();
@@ -32,6 +34,10 @@ public class BombLayer : MonoBehaviour
 
         //Add to GameManager's active bombs
         FindObjectOfType<GameManager>().AddBomb(bomb.GetComponent<PelletBomb>());
+
+        //Play sound
+        if (!VolumeManager.muted)
+            GetComponent<AudioSource>().PlayOneShot(bombLay);
     }
 
     // Update is called once per frame

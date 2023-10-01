@@ -9,7 +9,7 @@ public class GhostCutoff : GhostBehavior
         //Null-check
         base.OnNode(node);
 
-        if (node.Count == 0 || (ghost.movement.nextDirection != ghost.movement.direction && ghost.movement.nextDirection != Vector2.zero)) return;
+        if (node.Count == 0 || (!ghost.movement.blocked && ghost.movement.nextDirection != ghost.movement.direction && ghost.movement.nextDirection != Vector2.zero)) return;
 
         float minDist = 1000;
         Vector2 newDirection = Vector2.zero;

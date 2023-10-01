@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: afc3b534b8a93544984cf1676ba61ae4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 99a309d31e17186438f11150bcb68c23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 0}
-  bonkSound: {fileID: 8300000, guid: 2dfcde9545a1c584ea17cc35a2c21a3a, type: 3}
-  dieSound: {fileID: 8300000, guid: 2ce34a985e795e940869123ac4ed0499, type: 3}
+  bonkSound: {fileID: 8300000, guid: ad10dd8205e90bd4aa68aefac18a100f, type: 3}
+  dieSound: {fileID: 8300000, guid: 094514b71efa93c4a81e4773cc9540ed, type: 3}
   bomb: {fileID: 0}
   explosionLife: 1.5
 --- !u!61 &2978347619743700109
@@ -159,9 +159,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6f1c9cb4e13bb154e88b05a29b6d6fec, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 526aba3442fc313459fd9533d4667a07, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

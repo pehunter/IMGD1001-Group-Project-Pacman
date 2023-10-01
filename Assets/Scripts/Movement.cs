@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     public Vector2 initialDirection;
     public LayerMask obstacleLayer;
     bool frozen;
+    public bool blocked = false;
 
     //"Internal" variables
     public Rigidbody2D body { get; private set; }
@@ -81,15 +82,19 @@ public class Movement : MonoBehaviour
         //If direction is forced or space in direction is unoccupied, change current direction to next direction.
         if (forced || !Occupied(nextDirection))
         {
+            blocked = false;
             direction = nextDirection;
             nextDirection = Vector2.zero;
+        } else
+        {
+            blocked = true;
         }
     }
 
     //Check if the spot from the entity to the given direction is occupied
     public bool Occupied(Vector2 direction, bool small = false)
     {
-        float shot = 1.5f;
+        float shot = 1f;
         if (small)
             shot = 0.15f;
         //Check for obstacles from entity, slightly in desired direction. If no obstacles are present, then spot is free.

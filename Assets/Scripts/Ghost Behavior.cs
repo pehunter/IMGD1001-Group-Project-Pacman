@@ -10,7 +10,7 @@ public abstract class GhostBehavior : MonoBehaviour
     public float aiRefreshRate = 0.1f;
 
     protected float elapsedTime;
-    protected float giveUp = 2f;
+    //protected float giveUp = 2f;
 
     public GameObject test;
 
@@ -38,14 +38,16 @@ public abstract class GhostBehavior : MonoBehaviour
         elapsedTime += Time.fixedDeltaTime;
         if (elapsedTime > aiRefreshRate)
         {
-            Vector3 pos = ghost.transform.position + new Vector3(ghost.movement.direction.x, ghost.movement.direction.y, 0) * 2;
-            if (!checkMovement(pos))
-                checkMovement(ghost.transform.position);
+            if (!checkMovement(ghost.transform.position))
+            {
+                Vector3 pos = ghost.transform.position + new Vector3(ghost.movement.direction.x, ghost.movement.direction.y, 0) * 1.5f;
+                checkMovement(pos);
+            }
             //elapsedTime = 0f;
         }
 
-        if (elapsedTime > giveUp)
-            ghost.movement.nextDirection = Vector2.zero;
+        //if (elapsedTime > giveUp)
+            //ghost.movement.nextDirection = Vector2.zero;
     }
 
     //Check which directions can be entered from given pos
@@ -70,10 +72,14 @@ public abstract class GhostBehavior : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.BoxCast(checkPos, Vector2.one * 0.5f, 0f, direction, 1f, ghost.movement.obstacleLayer);
 
-        if (hit.collider == null)
-            return direction;
-        return Vector2.zero;
+        //var dbg = Instantiate(ghost.test);
+        //dbg.transform.position = new Vector3(hit.point.x, hit.point.y, -1);
 
+        if (hit.collider == null)
+        {
+            return direction;
+        }
+        return Vector2.zero;
     }
 
     //Ran when the ghost collides with a node

@@ -6,11 +6,16 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     //Important objects
-    public Ghost[] ghosts;
+    private Ghost[] ghosts = new Ghost[4];
     public Pacman pacman;
     public Transform pellets;
     protected HashSet<BreakableWall> walls = new HashSet<BreakableWall>();
     public BonusFruit fruit;
+    public AudioSource lifeGetSound;
+    protected int scoreSinceLife = 0;
+    int roundCount;
+    int LRC;
+    public List<GameObject> rounds;
 
     //UI
     public TextMeshProUGUI scoreDisplay;
@@ -28,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     List<PelletBomb> bombs;
     List<GameObject> explosions;
-    private bool gameNotEnding = true;
+    private bool gameOver = true;
 
     //Multiplier that increases for every ghost ate
     public int ghostMultiplier { get; private set; } = 1;
@@ -38,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         bombs = new List<PelletBomb>();
         explosions = new List<GameObject>();
+        LRC = 0;
 
         SetHighScore(0);
 
@@ -47,8 +53,8 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        //If out of lives and input is received, start a new game.
-        if(this.lives <= 0 && gameNotEnding && Input.anyKeyDown)
+        //If game is over, start game.
+        if(gameOver && Input.anyKeyDown)
         {
             NewGame();
         }
@@ -57,17 +63,53 @@ public class GameManager : MonoBehaviour
     //Initializes a new game
     private void NewGame()
     {
+        gameOver = false;
         //Set score and lives to their default values
+        scoreSinceLife = 0;
         SetScore(0);
         SetLives(3);
+        roundCount = 0;
 
         //Start the first round
         NewRound();
     }
 
+    public void SetGhostPitch(float newPitch)
+    {
+        GetComponent<AudioSource>().pitch = newPitch;
+    }
+
+    private void toggleGhostNoises(bool play)
+    {
+        //Turn on ghost noises
+        if (play && !VolumeManager.muted)
+            GetComponent<AudioSource>().Play();
+        else
+            GetComponent<AudioSource>().Stop();
+    }
     //Reset pellets, as well as pacman and ghosts
     private void NewRound()
     {
+        if (roundCount == rounds.Count)
+        {
+            GameOver();
+            return;
+        }
+
+        if(LRC != roundCount)
+        {
+            rounds[LRC].SetActive(false);
+            rounds[roundCount].SetActive(true);
+        }
+
+        LRC = roundCount;
+
+        //Load in ghosts
+        for (int g = 0; g < 4; g++)
+            ghosts[g] = rounds[roundCount].transform.GetChild(g).GetComponent<Ghost>();
+
+        toggleGhostNoises(true);
+
         //Reactivate all pellets
         foreach(Transform pellet in this.pellets) {
             pellet.gameObject.SetActive(true);
@@ -98,10 +140,6 @@ public class GameManager : MonoBehaviour
         {
             ghosts[i].ResetState();
         }
-
-        //Unbreak walls
-        foreach (BreakableWall wall in this.walls)
-            wall.ResetState();
 
         ResetBombs();
 
@@ -135,12 +173,26 @@ public class GameManager : MonoBehaviour
         if (score > highScore)
             SetHighScore(score);
         fruit.ResetState();
-        gameNotEnding = true;
+        //Unbreak walls
+        foreach (BreakableWall wall in this.walls)
+            wall.ResetState();
+
+        gameOver = true;
     }
 
     //Set score
     private void SetScore(int newScore)
     {
+        int pts = newScore - this.score;
+        scoreSinceLife += pts;
+        //Check for life
+        if (scoreSinceLife > 10000)
+        {
+            SetLives(lives + 1);
+            lifeGetSound.Play();
+            scoreSinceLife = 0;
+        }
+
         this.score = newScore;
         this.scoreDisplay.text = newScore.ToString();
     }
@@ -256,6 +308,8 @@ public class GameManager : MonoBehaviour
         foreach (var bomb in bombs)
             bomb.Freeze();
 
+        toggleGhostNoises(false);
+
         pacman.Freeze();
     }
 
@@ -267,6 +321,8 @@ public class GameManager : MonoBehaviour
 
         foreach (var bomb in bombs)
             bomb.Unfreeze();
+
+        toggleGhostNoises(true);
 
         pacman.Unfreeze();
     }
@@ -288,13 +344,9 @@ public class GameManager : MonoBehaviour
         pacman.Die();
 
         if(this.lives > 0)
-        {
             Invoke(nameof(ResetState), 4f);
-        } else
-        {
-            gameNotEnding = false;
+         else
             Invoke(nameof(GameOver), 4f);
-        }
     }
 
     //Handle score & game ending when pellet is increased
@@ -312,6 +364,9 @@ public class GameManager : MonoBehaviour
 
             //Freeze everything
             FreezeAll();
+
+            //Move to next round
+            roundCount++;
 
             //Start new round
             Invoke(nameof(NewRound), 4f);

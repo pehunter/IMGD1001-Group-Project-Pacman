@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 100
+  waka: {fileID: 8300000, guid: 91f9a808096a72840b623003cc40834b, type: 3}
   duration: 8
 --- !u!114 &-8324977835928793666
 MonoBehaviour:

@@ -37,7 +37,7 @@ public class GhostZoom : GhostBehavior
         //Null-check
         base.OnNode(node);
 
-        if (!canMove || node.Count == 0 || (ghost.movement.nextDirection != ghost.movement.direction && ghost.movement.nextDirection != Vector2.zero)) return;
+        if (!canMove || node.Count == 0 || (!ghost.movement.blocked && ghost.movement.nextDirection != ghost.movement.direction && ghost.movement.nextDirection != Vector2.zero)) return;
         print(gameObject.name);
         float minDist = 1000;
         Vector2 newDirection = Vector2.zero;
