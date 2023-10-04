@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1634113722445468799, guid: 87573c6442e944149b6c3a8f799a8f0d, type: 3}
+      propertyPath: respawnTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634113722445468799, guid: 87573c6442e944149b6c3a8f799a8f0d, type: 3}
       propertyPath: initialDuration
       value: 8
       objectReference: {fileID: 0}
@@ -106,3 +110,4 @@ MonoBehaviour:
   warpSpeed: 2
   tl: {fileID: 0}
   br: {fileID: 0}
+  warpSound: {fileID: 0}

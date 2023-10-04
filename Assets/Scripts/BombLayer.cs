@@ -25,7 +25,7 @@ public class BombLayer : MonoBehaviour
     public void PlaceBomb()
     {
         //Get position that bomb will snap to.
-        var roundedPosition = new Vector3(Mathf.Round(bombPos.x + 0.5f) - 0.5f, Mathf.Round(bombPos.y + 0.5f) - 0.5f, bombPos.z + 1);
+        var roundedPosition = new Vector3(Mathf.Round(bombPos.x + 0.5f) - 0.5f, Mathf.Round(bombPos.y + 0.5f) - 0.5f, -4);
 
         //Insert bomb
         var bomb = Instantiate(pelletBomb);

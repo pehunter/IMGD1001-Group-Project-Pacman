@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1634113722445468799, guid: 87573c6442e944149b6c3a8f799a8f0d, type: 3}
+      propertyPath: respawnTime
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2253306913773381034, guid: 87573c6442e944149b6c3a8f799a8f0d, type: 3}
       propertyPath: m_Name
       value: Purple

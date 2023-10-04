@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     float pitch = 1f;
     int pelletsEaten = 0;
     AudioSource asrc;
+    public int bombsToGive = 3;
 
     //UI
     public TextMeshProUGUI scoreDisplay;
@@ -434,7 +435,7 @@ public class GameManager : MonoBehaviour
     public void BombPelletEaten(PelletBombGiver pellet)
     {
         //Add bombs to Pacman
-        pacman.AddBomb(pellet.bombs);
+        pacman.AddBomb(bombsToGive);
 
         //Eat bomb pellet as if it were a normal pellet
         PelletEaten(pellet);
