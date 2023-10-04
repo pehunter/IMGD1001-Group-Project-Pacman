@@ -27,8 +27,11 @@ public class GhostDead : GhostBehavior
     }
     void EyesMode()
     {
-        FindObjectOfType<GameManager>().UnfreezeAll();
-        ghost.pacman.SetSprite(true);
+        if (!FindObjectOfType<GameManager>().dying)
+        {
+            FindObjectOfType<GameManager>().UnfreezeAll();
+            ghost.pacman.SetSprite(true);
+        }
 
         //Disable hitbox
         ghost.movement.collider.enabled = false;

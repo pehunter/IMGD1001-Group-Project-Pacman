@@ -70,7 +70,7 @@ public class GhostBomb : PelletBomb
         running = false;
     }
 
-    public void ResetState()
+    public void ResetState(bool begin)
     {
         CancelInvoke(nameof(Halftime));
         CancelInvoke(nameof(Explode));
@@ -78,6 +78,7 @@ public class GhostBomb : PelletBomb
         passedHalf = false;
         currentLength = 0;
         running = false;
+        this.begin = begin;
         directions = new List<Vector2>() { Vector2.zero };
         exploding = false;
     }
@@ -85,6 +86,6 @@ public class GhostBomb : PelletBomb
     protected override void OnEnd()
     {
         //ghost.movement.Unfreeze();
-        ResetState();
+        ResetState(false);
     }
 }

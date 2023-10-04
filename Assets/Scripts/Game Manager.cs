@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,7 +16,13 @@ public class GameManager : MonoBehaviour
     protected int scoreSinceLife = 0;
     int roundCount;
     int LRC;
+    public bool dying = false;
     public List<GameObject> rounds;
+    public AudioClip wave;
+    public AudioClip frighten;
+    float pitch = 1f;
+    int pelletsEaten = 0;
+    AudioSource asrc;
 
     //UI
     public TextMeshProUGUI scoreDisplay;
@@ -44,6 +51,7 @@ public class GameManager : MonoBehaviour
         bombs = new List<PelletBomb>();
         explosions = new List<GameObject>();
         LRC = 0;
+        asrc = GetComponent<AudioSource>();
 
         SetHighScore(0);
 
@@ -63,6 +71,8 @@ public class GameManager : MonoBehaviour
     //Initializes a new game
     private void NewGame()
     {
+        pitch = 1f;
+        asrc.pitch = pitch;
         gameOver = false;
         //Set score and lives to their default values
         scoreSinceLife = 0;
@@ -83,9 +93,9 @@ public class GameManager : MonoBehaviour
     {
         //Turn on ghost noises
         if (play && !VolumeManager.muted)
-            GetComponent<AudioSource>().Play();
+            asrc.Play();
         else
-            GetComponent<AudioSource>().Stop();
+            asrc.Stop();
     }
     //Reset pellets, as well as pacman and ghosts
     private void NewRound()
@@ -145,6 +155,11 @@ public class GameManager : MonoBehaviour
 
         UnfreezeAll();
 
+        pitch = 1f;
+        asrc.pitch = 1f;
+        asrc.clip = wave;
+
+        dying = false;
     }
 
     public void AddBomb(PelletBomb bomb)
@@ -189,7 +204,8 @@ public class GameManager : MonoBehaviour
         if (scoreSinceLife > 10000)
         {
             SetLives(lives + 1);
-            lifeGetSound.Play();
+            if (!VolumeManager.muted)
+                lifeGetSound.Play();
             scoreSinceLife = 0;
         }
 
@@ -207,30 +223,26 @@ public class GameManager : MonoBehaviour
     //Set lives
     private void SetLives(int newLives)
     {
-        if (!pacman.frozen)
+        this.lives = Mathf.Max(0,newLives);
+        Debug.Log(this.lives);
+        //Add/remove lives from UI until it maches
+        int lifeElapsed = lifeContainer.transform.childCount;
+
+        //Add
+        while (lifeElapsed < this.lives)
         {
-            this.lives = newLives;
-            Debug.Log(newLives);
-            //Add/remove lives from UI until it maches
-            int lifeElapsed = lifeContainer.transform.childCount;
+            var newLife = Instantiate(lifeIcon);
+            newLife.transform.SetParent(lifeContainer.transform, false);
+            newLife.GetComponent<RectTransform>().anchoredPosition = new Vector2(newLife.GetComponent<RectTransform>().rect.width * lifeElapsed, 0);
+            //newLife.GetComponent<RectTransform>().localScale = new Vector3(-1, 1, 1);
+            lifeElapsed++;
+        }
 
-            //Add
-            while (lifeElapsed < newLives)
-            {
-                var newLife = Instantiate(lifeIcon);
-                newLife.transform.SetParent(lifeContainer.transform, false);
-                newLife.GetComponent<RectTransform>().anchoredPosition = new Vector2(newLife.GetComponent<RectTransform>().rect.width * lifeElapsed, 0);
-                //newLife.GetComponent<RectTransform>().localScale = new Vector3(-1, 1, 1);
-                lifeElapsed++;
-            }
-
-            //Remove
-            while (lifeElapsed > newLives)
-            {
-                lifeElapsed--;
-                Destroy(lifeContainer.transform.GetChild(lifeElapsed).gameObject);
-            }
-
+        //Remove
+        while (lifeElapsed > this.lives)
+        {
+            lifeElapsed--;
+            Destroy(lifeContainer.transform.GetChild(lifeElapsed).gameObject);
         }
     }
 
@@ -286,6 +298,9 @@ public class GameManager : MonoBehaviour
     //Handle Pacman eating a ghost
     public void GhostEaten(Ghost ghost)
     {
+        if (ghost.needToUpdate)
+            return;
+
         //Calculate points based on ghost multiplier
         int points = ghost.points * ghostMultiplier;
 
@@ -293,7 +308,7 @@ public class GameManager : MonoBehaviour
 
         SetScore(score + points);
 
-        ghostMultiplier++;
+        ghostMultiplier = Mathf.Min(4, ghostMultiplier + 1);
 
         //Eat ghost
         ghost.swapBehavior(typeof(GhostDead), ghost.respawnTime);
@@ -328,9 +343,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void PacmanEaten() {
-        //pacman.gameObject.SetActive(false);
-        if (pacman.frozen)
+        if (dying || pacman.frozen)
             return;
+
+        dying = true;
+        //pacman.gameObject.SetActive(false);
 
         ResetBombs();
 
@@ -355,6 +372,13 @@ public class GameManager : MonoBehaviour
         //Remove pellet from game and add to score
         pellet.gameObject.SetActive(false);
         SetScore(score + pellet.points);
+
+        pelletsEaten++;
+        if(pelletsEaten >= 60)
+        {
+            pitch += 0.04f;
+            pelletsEaten = 0;
+        }
 
         //If the gameboard is empty, disable pacman and start new round.
         if (!HasRemainingPellets())
@@ -388,6 +412,11 @@ public class GameManager : MonoBehaviour
     //Handle consuming a power pellet
     public void PowerPelletEaten(PowerPellet pellet)
     {
+        //Set sound to frighten
+        asrc.clip = frighten;
+        asrc.pitch = 1f;
+        toggleGhostNoises(true);
+
         for (int i = 0; i < ghosts.Length; i++)
         {
             //Frightenen ghost if out of home state
@@ -428,5 +457,8 @@ public class GameManager : MonoBehaviour
     private void ResetGhostMultiplier()
     {
         ghostMultiplier = 1;
+        asrc.clip = wave;
+        asrc.pitch = pitch;
+        toggleGhostNoises(true);
     }
 }

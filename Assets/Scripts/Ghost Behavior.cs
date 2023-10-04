@@ -8,6 +8,7 @@ public abstract class GhostBehavior : MonoBehaviour
 {
     //How often to check for new directions
     public float aiRefreshRate = 0.1f;
+    protected bool force = false;
 
     protected float elapsedTime;
     //protected float giveUp = 2f;
@@ -53,14 +54,17 @@ public abstract class GhostBehavior : MonoBehaviour
     //Check which directions can be entered from given pos
     protected bool checkMovement(Vector3 pos)
     {
-        pos = new Vector3(Mathf.Round(pos.x + 0.5f) - 0.5f, Mathf.Round(pos.y + 0.5f) - 0.5f, pos.z);
         List<Vector2> freeDirections = new List<Vector2>();
-        foreach (var dir in new List<Vector2> { Vector2.up, Vector2.down, Vector2.left, Vector2.right })
+        if (this.force)
+            freeDirections.Add(new Vector2(1, 0));
+        else
         {
-            var d = CheckDirection(pos, dir);
-            if (d != Vector2.zero)
+            pos = new Vector3(Mathf.Round(pos.x + 0.5f) - 0.5f, Mathf.Round(pos.y + 0.5f) - 0.5f, pos.z);
+            foreach (var dir in new List<Vector2> { Vector2.up, Vector2.down, Vector2.left, Vector2.right })
             {
-                freeDirections.Add(d);
+                var d = CheckDirection(pos, dir);
+                if (d != Vector2.zero)
+                    freeDirections.Add(d);
             }
         }
         OnNode(freeDirections);
@@ -103,6 +107,9 @@ public abstract class GhostBehavior : MonoBehaviour
                 break;
             case "Yellow":
                 ghost.swapBehavior(typeof(GhostZoom), 0);
+                break;
+            case "Purple":
+                ghost.swapBehavior(typeof(GhostFloat), 0);
                 break;
             default:
                 ghost.swapBehavior(typeof(GhostChase), 0);

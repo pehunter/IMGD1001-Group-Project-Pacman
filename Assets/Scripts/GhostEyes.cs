@@ -25,13 +25,14 @@ public class GhostEyes : MonoBehaviour
     //Set sprite to corresponding movement direction
     private void Update()
     {
-        if (movement.direction == Vector2.up)
+        var rnd = new Vector2(Mathf.Round(movement.direction.x), Mathf.Round(movement.direction.y));
+        if (rnd == Vector2.up)
             spriteRenderer.sprite = up;
-        else if (movement.direction == Vector2.down)
+        else if (rnd == Vector2.down)
             spriteRenderer.sprite = down;
-        else if (movement.direction == Vector2.left)
+        else if (rnd == Vector2.left)
             spriteRenderer.sprite = left;
-        else if (movement.direction == Vector2.right)
+        else if (rnd == Vector2.right)
             spriteRenderer.sprite = right;
     }
 

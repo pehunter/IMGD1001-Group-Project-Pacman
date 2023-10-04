@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class Ghost : MonoBehaviour
 {
@@ -27,7 +29,7 @@ public class Ghost : MonoBehaviour
     //Next behavior logic
     private float nextDuration;
     private Type nextBehavior;
-    bool needToUpdate;
+    public bool needToUpdate;
 
     //Mark inside and outside points for home
     public Transform inside;
@@ -48,6 +50,8 @@ public class Ghost : MonoBehaviour
     private bool pauseBob;
     private string bobDirection;
 
+    AudioSource source;
+
     //Renderers for each part of the ghost
     public SpriteRenderer bodySprite { get; private set; }
     public SpriteRenderer eyesSprite {get; private set;}
@@ -67,6 +71,7 @@ public class Ghost : MonoBehaviour
     {
         frightened = false;
         movement = GetComponent<Movement>();
+        source = GetComponent<AudioSource>();
 
         //Set components
         bodySprite = body.GetComponent<SpriteRenderer>();
@@ -88,7 +93,7 @@ public class Ghost : MonoBehaviour
     {
         //If ghost has bomb, reset that.
         if (GetComponent<GhostBomb>() != null)
-            GetComponent<GhostBomb>().ResetState();
+            GetComponent<GhostBomb>().ResetState(initialBehavior != "GhostHome");
 
         //Reset renderers
         bodySprite.enabled = true;
@@ -149,7 +154,14 @@ public class Ghost : MonoBehaviour
         //If ghost has collided with pacman, either eat the ghost or eat pacman depending on frightened state.
         if (collision.gameObject.layer == LayerMask.NameToLayer("Pacman") && GetComponent<GhostBehavior>().GetType() != typeof(GhostDead))
             if (frightened)
+            {
+                if (!VolumeManager.muted)
+                {
+                    source.pitch = 0.93f + FindObjectOfType<GameManager>().ghostMultiplier / 15f;
+                    source.Play();
+                }
                 FindObjectOfType<GameManager>().GhostEaten(this);
+            }
             else
                 FindObjectOfType<GameManager>().PacmanEaten();
     }
@@ -200,6 +212,8 @@ public class Ghost : MonoBehaviour
     public void Freeze()
     {
         frozen = true;
+        if (GetComponent<GhostBomb>() != null)
+            GetComponent<GhostBomb>().Freeze();
         movement.Freeze();
         bodyAnimation.Freeze();
         whiteAnimation.Freeze();
@@ -210,6 +224,8 @@ public class Ghost : MonoBehaviour
     public void Unfreeze()
     {
         frozen = false;
+        if (GetComponent<GhostBomb>() != null)
+            GetComponent<GhostBomb>().Unfreeze();
         movement.Unfreeze();
         bodyAnimation.Unfreeze();
         whiteAnimation.Unfreeze();

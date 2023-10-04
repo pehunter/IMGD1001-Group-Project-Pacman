@@ -156,6 +156,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 77161e8e8bee8ad4280d90b263fece75, type: 3}
   scores: 640000002c010000f4010000bc020000e8030000d0070000b80b000088130000
   cycleTime: 30
+  fruitSound: {fileID: 8300000, guid: 2bec945cf1d761c4b96441219be7be66, type: 3}
 --- !u!1001 &222019870552587110
 PrefabInstance:
   m_ObjectHideFlags: 0

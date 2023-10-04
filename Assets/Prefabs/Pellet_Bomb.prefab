@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8982477287348929957}
   - component: {fileID: -3188313759807827941}
   - component: {fileID: -7583849699005210553}
+  - component: {fileID: 2030435651911960177}
   m_Layer: 11
   m_Name: Pellet_Bomb
   m_TagString: Untagged
@@ -127,7 +128,6 @@ MonoBehaviour:
   ghostLayer:
     serializedVersion: 2
     m_Bits: 128
-  bombExplode: {fileID: 8300000, guid: 526aba3442fc313459fd9533d4667a07, type: 3}
   explosion: {fileID: 5188067434215914401, guid: bad443b7b5813ff45bf0a9d2265db1ae, type: 3}
   center: {fileID: 21300000, guid: 359ee9878ec65db4b96f72991c6b7702, type: 3}
   middle: {fileID: 21300000, guid: 99a309d31e17186438f11150bcb68c23, type: 3}
@@ -187,7 +187,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: aee8e04889adb2a42884a6ac431a604b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -273,3 +273,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &2030435651911960177
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665247158692775065}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7

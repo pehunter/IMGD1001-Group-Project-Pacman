@@ -100,10 +100,16 @@ public class Pacman : MonoBehaviour
         {
             //Get position that bomb will snap to.
             var roundedPosition = new Vector3(Mathf.Round(transform.position.x + 0.5f) - 0.5f, Mathf.Round(transform.position.y + 0.5f) - 0.5f, transform.position.z + 1);
+            float angle = Mathf.Atan2(movement.direction.y, movement.direction.x);
+            var rot = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
 
             //Insert bomb
-            var bomb = Instantiate(pelletBomb);
-            bomb.transform.position = roundedPosition;
+            var bomb = Instantiate(pelletBomb, roundedPosition, Quaternion.identity);
+            if (bomb.GetComponent<Movement>() != null)
+            {
+                bomb.transform.rotation = rot;
+                bomb.GetComponent<Movement>().initialDirection = movement.direction;
+            }
 
             //Add to GameManager's active bombs
             FindObjectOfType<GameManager>().AddBomb(bomb.GetComponent<PelletBomb>());
@@ -112,7 +118,8 @@ public class Pacman : MonoBehaviour
             FindObjectOfType<GameManager>().SetBombs(bombs);
 
             //Play sound
-            if (!VolumeManager.muted)
+            bool shouldPlay = !VolumeManager.muted;
+            if (shouldPlay)
                 GetComponent<AudioSource>().PlayOneShot(bombLay);
         }
     }
@@ -152,7 +159,8 @@ public class Pacman : MonoBehaviour
     private void ActuallyDie()
     {
         //play death noise 
-        GetComponent<AudioSource>().PlayOneShot(youDied, 0.7f);
+        if (!VolumeManager.muted)
+            GetComponent<AudioSource>().PlayOneShot(youDied, 0.7f);
 
         //Rotate before dying
         transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(movement.direction.y, movement.direction.x) * Mathf.Rad2Deg - 90f, Vector3.forward);

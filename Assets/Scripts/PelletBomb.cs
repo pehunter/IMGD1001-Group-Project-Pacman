@@ -27,7 +27,6 @@ public class PelletBomb : MonoBehaviour
     protected int currentLength = 0;
 
     public LayerMask obstacleLayer;
-    public LayerMask ghostLayer;
 
     public bool frozen { get; private set; } = false;
 
@@ -76,7 +75,7 @@ public class PelletBomb : MonoBehaviour
     }
 
     //Explode the bomb
-    protected void Explode()
+    protected virtual void Explode()
     {
         if (PreExplode())
         {
@@ -114,10 +113,7 @@ public class PelletBomb : MonoBehaviour
                         pos.z = -7f;
                     }
                     else if (currentLength == length)
-                    {
                         exploSprite = tip;
-                        pos.z = -7f;
-                    }
 
                     var explo = Instantiate(explosion);
                     explo.GetComponent<Explosion>().explosionLife = explosionLife;

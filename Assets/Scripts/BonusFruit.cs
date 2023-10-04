@@ -9,6 +9,7 @@ public class BonusFruit : MonoBehaviour
     public List<Sprite> sprites;
     public List<int> scores;
     public float cycleTime;
+    public AudioClip fruitSound;
 
     private float elapsedTime;
     private int currentFruit = 0;
@@ -57,6 +58,10 @@ public class BonusFruit : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
+        {
+            if (!VolumeManager.muted)
+                collision.GetComponent<AudioSource>().PlayOneShot(fruitSound);
             cycle();
+        }
     }
 }

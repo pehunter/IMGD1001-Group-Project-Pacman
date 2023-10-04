@@ -81,7 +81,8 @@ MonoBehaviour:
   normal: {fileID: 8136626588466416306}
   dead: {fileID: 5136966859105020071}
   startTime: 0
-  pelletBomb: {fileID: 1665247158692775065, guid: c8a695e9d3157814cb76f2e32f678a56, type: 3}
+  pelletBomb: {fileID: 8178621953365024333, guid: 7a8c2a1355b1c1e4eaa19c327d4a9da9, type: 3}
+  bombLay: {fileID: 0}
   youDied: {fileID: 8300000, guid: 07065c786912ec4469f055abce85c606, type: 3}
 --- !u!114 &6325540731255226075
 MonoBehaviour:
