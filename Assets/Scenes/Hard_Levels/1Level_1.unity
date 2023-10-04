@@ -12961,6 +12961,7 @@ MonoBehaviour:
   - {fileID: 335930385}
   - {fileID: 1285616918}
   - {fileID: 1809821172}
+  difficulty: 1
   scoreDisplay: {fileID: 542121377}
   highScoreDisplay: {fileID: 584918905}
   lifeContainer: {fileID: 542121376}

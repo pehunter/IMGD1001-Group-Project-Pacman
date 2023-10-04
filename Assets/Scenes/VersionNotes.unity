@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1200}
+  m_AnchoredPosition: {x: 0, y: -1450}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &200479949
@@ -208,8 +208,10 @@ MonoBehaviour:
     maze will now change color as score increases.\n\nChanged layout of second level
     to make it less\nbuggy\n\nAdded new bugs I think?\n\n-- Version 0.5.1.1s5 --\n\nRedesigned
     the main menu and level select\nscreens\n\nAdded mute button\n\nAdded new sprites
-    for bombs\n\nAdded new sound effects for bombs, ghosts, and UI.\n\nFixed Ghost
-    AI bugs introduced in last update\n\nChanged Level 2's design a bit"
+    for bombs\n\nAdded new sound effects for bombs, ghosts, and UI\n\nAdded difficulty
+    settings, which affect \nthe number of bombs gained from each pickup \n\nAdded
+    a cute little speed boost for \npicking up bonus fruit\n\nFixed Ghost AI bugs
+    introduced in last update\n\nChanged Level 2's design a bit"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a9cab8cde7452db45829cbd31bce388a, type: 2}
   m_sharedMaterial: {fileID: 6116094958838382817, guid: a9cab8cde7452db45829cbd31bce388a, type: 2}
@@ -540,7 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd59f9245a77e149ac39e7ed20629a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floor: -61
+  floor: -80
 --- !u!81 &1256419273
 AudioListener:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine;
 public class PelletBombGiver : Pellet
 {
     //How many bombs to give Pacman
-    public int bombs = 1;
+    public int bombs = 3;
 
     protected override void Eat()
     {

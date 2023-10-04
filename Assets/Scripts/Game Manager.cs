@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     int roundCount;
     int LRC;
     public List<GameObject> rounds;
+    public int difficulty = 0;
 
     //UI
     public TextMeshProUGUI scoreDisplay;
@@ -405,7 +406,7 @@ public class GameManager : MonoBehaviour
     public void BombPelletEaten(PelletBombGiver pellet)
     {
         //Add bombs to Pacman
-        pacman.AddBomb(pellet.bombs);
+        pacman.AddBomb(pellet.bombs - difficulty);
 
         //Eat bomb pellet as if it were a normal pellet
         PelletEaten(pellet);

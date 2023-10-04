@@ -44,6 +44,9 @@ public class BonusFruit : MonoBehaviour
         //Award points based on fruit
         FindObjectOfType<GameManager>().BonusFruitEaten(transform.position, scores[currentFruit]);
 
+        //Gives pac-man a little speed boost for the bonus fruit. this speed boost is lost on death. 
+        FindObjectOfType<Pacman>().GetComponent<Movement>().speedMultiplier *= 1.2f;
+
         //Move to next fruit
         currentFruit = Mathf.Min(currentFruit + 1, scores.Count - 1);
         GetComponent<SpriteRenderer>().sprite = sprites[currentFruit];
