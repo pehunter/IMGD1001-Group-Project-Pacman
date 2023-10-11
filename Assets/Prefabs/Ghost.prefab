@@ -421,6 +421,7 @@ MonoBehaviour:
   white: {fileID: 974311249453619119}
   frozen: 0
   pacman: {fileID: 0}
+  speedBuff: 3
 --- !u!58 &7671781345501727035
 CircleCollider2D:
   m_ObjectHideFlags: 0

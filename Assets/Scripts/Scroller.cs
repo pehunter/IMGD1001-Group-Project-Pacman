@@ -7,6 +7,7 @@ public class Scroller : MonoBehaviour
 {
 
     public int floor;
+    public float speed;
     //this variable is an unnecessary middleman but eh it's not worth ripping out
     private float yFloat;
 
@@ -21,13 +22,13 @@ public class Scroller : MonoBehaviour
         if (Input.GetKey(KeyCode.W) && this.transform.position.y < 0)
         {
             // each frame the player holds W, the camera moves up 0.08. 
-            this.transform.position = new Vector3(0, yFloat + 0.08f, -10);
+            this.transform.position = new Vector3(0, yFloat + speed, -10);
         }
         //ditto here, floor is as low as it goes so once the player gets there they can't scroll down. 
         else if (Input.GetKey(KeyCode.S) && this.transform.position.y > floor)
         {
             // each frame the player holds D, the camera moves down 0.08. 
-            this.transform.position = new Vector3(0, yFloat - 0.08f, -10);
+            this.transform.position = new Vector3(0, yFloat - speed, -10);
         }
     }
 }

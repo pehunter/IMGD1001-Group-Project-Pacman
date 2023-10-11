@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1200}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: -1247}
+  m_SizeDelta: {x: 650, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &200479949
 MonoBehaviour:
@@ -206,10 +206,19 @@ MonoBehaviour:
     types, the yellow and hot pink\nghosts. The yellow dashes towards pacman and
     stops\nwhen it hits a wall, while the hot pink ghost \nperiodically lays bombs.\n\nThe
     maze will now change color as score increases.\n\nChanged layout of second level
-    to make it less\nbuggy\n\nAdded new bugs I think?\n\n-- Version 0.5.1.1s5 --\n\nRedesigned
-    the main menu and level select\nscreens\n\nAdded mute button\n\nAdded new sprites
-    for bombs\n\nAdded new sound effects for bombs, ghosts, and UI.\n\nFixed Ghost
-    AI bugs introduced in last update\n\nChanged Level 2's design a bit"
+    to make it less\nbuggy\n\nAdded new bugs I think?\n\n-- Version 0.4.1.3s5 --\n\nRedesigned
+    the main menu and level select\nscreens\n\nAdded mute button\n*Note: Does NOT
+    work with the bomb drop sound\nfor some reason.\n\nAdded new sprites for bombs\n\nAdded
+    new sound effects for bombs, ghosts, and UI.\n\nFixed Ghost AI bugs introduced
+    in last update\n\nChanged Level 2's design to allow ghosts to move around\neasier.\n\nAdded
+    purple ghosts, which move through walls to\ndirectly chase the player.\n\nAdded
+    green ghosts, which will \nteleport near the player after a set amount of time.\n\nAdded
+    level 3, which is just the original Pac-Maze with\nthe new ghosts.\n\nAdded the
+    Missle, a type of bomb that moves in the\ndirection of Pac-Man and explodes when
+    it hits \na ghost.\n\nAdded Level 4, a level that showcases the new missle powerup.\n\nAdded
+    hardmode, a difficulty setting that alters properties of the\ngame to make the
+    game harder. So far, it alters the ghosts,\nPac-Man's speed, and the amount of
+    bombs you obtain.\n\nEating bonus fruit now makes you move a bit faster."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a9cab8cde7452db45829cbd31bce388a, type: 2}
   m_sharedMaterial: {fileID: 6116094958838382817, guid: a9cab8cde7452db45829cbd31bce388a, type: 2}
@@ -236,8 +245,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -252,7 +261,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -540,7 +549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd59f9245a77e149ac39e7ed20629a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floor: -61
+  floor: -70
+  speed: 0.05
 --- !u!81 &1256419273
 AudioListener:
   m_ObjectHideFlags: 0

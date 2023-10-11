@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombTime: 5
-  bombDetonationTime: 0
+  bombDetonationTime: 3
   pelletBomb: {fileID: 1665247158692775065, guid: c8a695e9d3157814cb76f2e32f678a56, type: 3}
   begin: 0
   bombLay: {fileID: 8300000, guid: aee8e04889adb2a42884a6ac431a604b, type: 3}

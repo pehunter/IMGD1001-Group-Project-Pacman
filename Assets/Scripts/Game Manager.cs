@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.Build;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -24,6 +23,9 @@ public class GameManager : MonoBehaviour
     int pelletsEaten = 0;
     AudioSource asrc;
     public int bombsToGive = 3;
+
+    //Changes to apply when difficult
+    public int bombNerf = 1;
 
     //UI
     public TextMeshProUGUI scoreDisplay;
@@ -55,6 +57,9 @@ public class GameManager : MonoBehaviour
         asrc = GetComponent<AudioSource>();
 
         SetHighScore(0);
+
+        if (!DifficultyManager.hard)
+            bombNerf = 0;
 
         //Start a new game on load
         NewGame();
@@ -435,7 +440,7 @@ public class GameManager : MonoBehaviour
     public void BombPelletEaten(PelletBombGiver pellet)
     {
         //Add bombs to Pacman
-        pacman.AddBomb(bombsToGive);
+        pacman.AddBomb(bombsToGive - bombNerf);
 
         //Eat bomb pellet as if it were a normal pellet
         PelletEaten(pellet);

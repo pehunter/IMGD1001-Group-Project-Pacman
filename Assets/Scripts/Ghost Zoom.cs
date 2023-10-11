@@ -6,6 +6,7 @@ public class GhostZoom : GhostBehavior
 {
     //How long to pause when wall hit.
     public float chargeTime = 1f;
+    public float chargeBuff = 0.7f;
 
     //Note: Original speed serves as speed!
 
@@ -16,6 +17,8 @@ public class GhostZoom : GhostBehavior
     {
         ghost = GetComponent<Ghost>();
         ghost.movement.speed = 0f;
+        if (DifficultyManager.hard)
+            chargeTime *= chargeBuff;
     }
     protected override void FixedUpdate()
     {

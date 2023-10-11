@@ -284,6 +284,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1160169493608983290, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
+      propertyPath: sound
+      value: 
+      objectReference: {fileID: 542121379}
     - target: {fileID: 5652743662603150463, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
       propertyPath: m_Name
       value: UI
@@ -400,6 +404,11 @@ MonoBehaviour:
 --- !u!82 &542121378 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 5082177230671579108, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
+  m_PrefabInstance: {fileID: 542121375}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &542121379 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2960263005464183565, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
   m_PrefabInstance: {fileID: 542121375}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &584918905 stripped
@@ -11655,7 +11664,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2492905286174780292, guid: 12c45adf4856c824b8fbc242d24fbb6a, type: 3}
       propertyPath: m_Name
-      value: HotPink
+      value: Pink_Deluxe
       objectReference: {fileID: 0}
     - target: {fileID: 3130080152104786513, guid: 12c45adf4856c824b8fbc242d24fbb6a, type: 3}
       propertyPath: inside
@@ -11771,6 +11780,10 @@ PrefabInstance:
       propertyPath: tl
       value: 
       objectReference: {fileID: 238683303}
+    - target: {fileID: 5786217725791695117, guid: 66c478922f7b54e4b85649d17232cad9, type: 3}
+      propertyPath: warpBuff
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5786217725791695117, guid: 66c478922f7b54e4b85649d17232cad9, type: 3}
       propertyPath: warpSound
       value: 

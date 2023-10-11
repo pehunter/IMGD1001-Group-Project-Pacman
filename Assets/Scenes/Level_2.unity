@@ -511,6 +511,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1160169493608983290, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
+      propertyPath: sound
+      value: 
+      objectReference: {fileID: 542121379}
     - target: {fileID: 5652743662603150463, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
       propertyPath: m_Name
       value: UI
@@ -627,6 +631,11 @@ MonoBehaviour:
 --- !u!82 &542121378 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 5082177230671579108, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
+  m_PrefabInstance: {fileID: 542121375}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &542121379 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2960263005464183565, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
   m_PrefabInstance: {fileID: 542121375}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &584918905 stripped
@@ -12354,6 +12363,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1401679605}
     - target: {fileID: 1277252491342907804, guid: 66c478922f7b54e4b85649d17232cad9, type: 3}
+      propertyPath: speedBuff
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277252491342907804, guid: 66c478922f7b54e4b85649d17232cad9, type: 3}
       propertyPath: initialBehavior
       value: GhostChase
       objectReference: {fileID: 0}
@@ -12373,6 +12386,14 @@ PrefabInstance:
       propertyPath: tl
       value: 
       objectReference: {fileID: 863445919}
+    - target: {fileID: 5786217725791695117, guid: 66c478922f7b54e4b85649d17232cad9, type: 3}
+      propertyPath: warpBuff
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786217725791695117, guid: 66c478922f7b54e4b85649d17232cad9, type: 3}
+      propertyPath: warpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: dc915436df6aa484a9e3cddb334a358a, type: 3}
     - target: {fileID: 5786217725791695117, guid: 66c478922f7b54e4b85649d17232cad9, type: 3}
       propertyPath: warpSpeed
       value: 1

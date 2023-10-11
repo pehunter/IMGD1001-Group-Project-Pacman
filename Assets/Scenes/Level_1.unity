@@ -615,7 +615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2492905286174780292, guid: 12c45adf4856c824b8fbc242d24fbb6a, type: 3}
       propertyPath: m_Name
-      value: Pink Deluxe
+      value: Pink_Deluxe
       objectReference: {fileID: 0}
     - target: {fileID: 3130080152104786513, guid: 12c45adf4856c824b8fbc242d24fbb6a, type: 3}
       propertyPath: inside
@@ -745,14 +745,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5082177230671579108, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
-      propertyPath: m_audioClip
+    - target: {fileID: 1160169493608983290, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
+      propertyPath: sound
       value: 
-      objectReference: {fileID: 8300000, guid: 412984503c2f48d468c212b6dc0edd01, type: 3}
-    - target: {fileID: 5082177230671579108, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1501918680}
     - target: {fileID: 5652743662603150463, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
       propertyPath: m_Name
       value: UI
@@ -765,6 +761,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1558867340}
+    - target: {fileID: 6443628252197963458, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8383025072398103739, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -9609,6 +9609,11 @@ Transform:
   m_Father: {fileID: 1653754534}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1501918680 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2960263005464183565, guid: 4dc82a7a8a2fa4d40a4312f94c9a055b, type: 3}
+  m_PrefabInstance: {fileID: 542121375}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1558867338
 GameObject:
   m_ObjectHideFlags: 0

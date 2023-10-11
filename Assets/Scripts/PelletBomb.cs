@@ -28,6 +28,8 @@ public class PelletBomb : MonoBehaviour
 
     public LayerMask obstacleLayer;
 
+    public float exploChange;
+
     public bool frozen { get; private set; } = false;
 
     //Prefab for explosion
@@ -48,6 +50,9 @@ public class PelletBomb : MonoBehaviour
         directions = new List<Vector2>() { Vector2.zero };
         explosionTiles = new List<GameObject>();
         passedHalf = false;
+
+        if (DifficultyManager.hard)
+            explosionLife *= exploChange;
     }
 
     private void Update()

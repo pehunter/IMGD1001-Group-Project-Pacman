@@ -6,10 +6,11 @@ using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class GhostWarp : MonoBehaviour
 {
-    public float timeToWarp = 30f;
+    public float timeToWarp = 5f;
     private float elapsedTime = 0f;
     public float dist = 5f;
     public float warpSpeed = 2f;
+    public float warpBuff = 0.7f;
     public GameObject tl;
     public GameObject br;
     Ghost ghost;
@@ -21,6 +22,13 @@ public class GhostWarp : MonoBehaviour
         asrc = GetComponent<AudioSource>();
         defaultSound = asrc.clip;
         ghost = GetComponent<Ghost>();
+
+        if(DifficultyManager.hard)
+        {
+            timeToWarp *= warpBuff;
+            warpSpeed *= warpBuff;
+        }
+
     }
 
     private void Update()

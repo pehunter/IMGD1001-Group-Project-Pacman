@@ -125,9 +125,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 512
-  ghostLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  exploChange: 0.5
   explosion: {fileID: 5188067434215914401, guid: bad443b7b5813ff45bf0a9d2265db1ae, type: 3}
   center: {fileID: 21300000, guid: 359ee9878ec65db4b96f72991c6b7702, type: 3}
   middle: {fileID: 21300000, guid: 99a309d31e17186438f11150bcb68c23, type: 3}

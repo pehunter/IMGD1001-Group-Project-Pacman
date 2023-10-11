@@ -67,6 +67,9 @@ public class Ghost : MonoBehaviour
     //Pacman
     public Pacman pacman;
 
+    //Speed buff for hardmode
+    public float speedBuff;
+
     void Awake()
     {
         frightened = false;
@@ -112,6 +115,9 @@ public class Ghost : MonoBehaviour
 
     private void Start()
     {
+        if (DifficultyManager.hard)
+            movement.speed += speedBuff;
+            
         //Add initial behavior
         swapBehavior(Type.GetType(initialBehavior), initialDuration);
     }

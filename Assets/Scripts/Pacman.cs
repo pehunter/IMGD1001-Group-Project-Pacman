@@ -35,6 +35,9 @@ public class Pacman : MonoBehaviour
     //public AudioSource source;
     public AudioClip youDied;
 
+    //Speed buff for hardmode
+    public float speedBuff;
+
 
     public bool frozen { get; private set; } = false;
 
@@ -49,6 +52,9 @@ public class Pacman : MonoBehaviour
 
         deathAnimator = dead.GetComponent<SpriteAnimator>();
         deathRenderer = dead.GetComponent <SpriteRenderer>();
+
+        if (DifficultyManager.hard)
+            movement.speed += speedBuff;
 
         //start waka loop 
         //source.Play(); 
